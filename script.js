@@ -1,18 +1,33 @@
-// let multiply = function() {
-//     let answers = prompt("What numbers are we adding today my lord?")
-//     console.log(answers)
-//     let product = answers.replaceAll(",", " ")
-//                          .split(" ")
-//                          .filter(item => item !== "") 
-//                          .reduce((acc, currentNum) => {
-//                             return acc * currentNum;
-//                          }, 1);
+// let numberOne;
+// let numberTwo;
+// let operator;
 
-//     console.log(product);
-// }
+let multiply = function(numberOne, numberTwo) {
+    console.log(numberOne * numberTwo)
+}
+let divide = function(numberOne, numberTwo) {
+    console.log(Number(numberOne) / Number(numberTwo))
+}
+let add = function(numberOne, numberTwo) {
+    console.log(numberOne + numberTwo)
+}
+let subtract = function(numberOne, numberTwo) {
+    console.log(numberOne - numberTwo)
+}
 
-const multiplyButton = document.querySelector("#multiplyTest")
+const operate = function(numberOne, numberTwo, operator) {
+    switch (operator) {
+        case "*":
+            multiply(numberOne, numberTwo)
+            break;
+        case "/":
+            divide(numberOne, numberTwo)
+            break;
+        case "+":
+            add(numberOne, numberTwo)
+            break;
+        case "-":
+            subtract(numberOne, numberTwo)
+    }
+}
 
-multiplyButton.addEventListener("click", () => {
-    multiply();
-})
