@@ -3,9 +3,7 @@
     border-color: black;
     border-style: solid;
     width: 600px;
-    height: 750px;
     justify-content: space-between;
-    flex-wrap: wrap;
     flex-direction: column;
 }
 #display {
@@ -13,22 +11,30 @@
     border-color: black;
     border-style: solid;
     height: 100px;
-    width: 100px;
+    width: 200px;
 }
 .calculatorButtons {
     display: flex;
     border-color: black;
     border-style: solid;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
+    font-size: 10px;
+    align-items: center;
+    justify-content: center;
 }
 .row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5px;
     margin: 10px
 }
 #display {
-    width: 500px;
+    display: flex;
+    border-color: black;
+    border-style: solid;
+    height: 50px;
+    width: 210px;
     align-self: center;
     margin: 10px
 }
