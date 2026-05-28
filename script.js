@@ -2,6 +2,7 @@ let numberOne;
 let numberTwo;
 let operator;
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
+const display = document.querySelector("#display")
 
 let multiply = function(numberOne, numberTwo) {
     console.log(numberOne * numberTwo)
@@ -38,4 +39,5 @@ calculatorButtons.forEach((button) => {
 
 function updateNumberOne(e) {
     console.log(event.target.innerText)
+    display.textContent+=(event.target.innerText)
 }
