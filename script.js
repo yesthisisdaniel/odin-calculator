@@ -1,7 +1,8 @@
-let numberOne;
-let numberTwo;
-let operator;
+let numberOne = "";
+let numberTwo = "";
+let operator = ""
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
+const digitButtons = document.querySelectorAll(".digitButtons")
 const display = document.querySelector("#display")
 
 let multiply = function(numberOne, numberTwo) {
@@ -33,11 +34,32 @@ const operate = function(numberOne, numberTwo, operator) {
     }
 }
 
+digitButtons.forEach((button) => {
+    button.addEventListener("click", updateValues)
+})
 calculatorButtons.forEach((button) => {
-    button.addEventListener("click", updateNumberOne)
+    button.addEventListener("click", updateValues)
 })
 
-function updateNumberOne(e) {
-    console.log(event.target.innerText)
-    display.value = event.target.innerText
+function updateValues(e) {
+    let currentNum = "";
+
+    if (numberOne === "") {
+        numberOne = e.target.innerText;
+        display.value += e.target.innerText;
+        console.log(e.target.innerText)
+    }
+    else if (operator === "") {
+        operator = e.target.innerText;
+        display.value += e.target.innerText;
+        console.log(e.target.innerText)
+    }
+    else {
+        numberTwo = e.target.innerText;
+        display.value += e.target.innerText;
+        console.log(e.target.innerText)
+    }
+    console.log("numberOne is:" + numberOne);
+    console.log("operator is:" + operator);
+    console.log(operator);
 }
