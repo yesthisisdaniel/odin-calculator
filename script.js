@@ -1,7 +1,7 @@
 let numberOne;
 let numberTwo;
 let operator;
-const calculatorButtons = document.querySelector(".calculatorButtons")
+const calculatorButtons = document.querySelectorAll(".calculatorButtons")
 
 let multiply = function(numberOne, numberTwo) {
     console.log(numberOne * numberTwo)
@@ -32,8 +32,10 @@ const operate = function(numberOne, numberTwo, operator) {
     }
 }
 
-calculatorButtons.addEventListener("onClick", updateNumberOne)
+calculatorButtons.forEach((button) => {
+    button.addEventListener("click", updateNumberOne)
+})
 
-function updateNumberOne() {
-    console.log(calculatorButtons.textContent)
+function updateNumberOne(e) {
+    console.log(event.target.innerText)
 }
