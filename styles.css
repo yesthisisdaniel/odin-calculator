@@ -2,24 +2,19 @@
     display: flex;
     border-color: black;
     border-style: solid;
-    width: 600px;
+    width: 250px;
+    padding: 4px;
     justify-content: space-between;
     flex-direction: column;
 }
-#display {
-    display: flex;
-    border-color: black;
-    border-style: solid;
-    height: 100px;
-    width: 200px;
-}
+
 .calculatorButtons {
     display: flex;
     border-color: black;
     border-style: solid;
     height: 50px;
     width: 50px;
-    font-size: 10px;
+    font-size: 15px;
     align-items: center;
     justify-content: center;
 }
@@ -27,7 +22,7 @@
     display: flex;
     justify-content: center;
     gap: 5px;
-    margin: 10px
+    margin: 2px
 }
 #display {
     display: flex;
@@ -36,5 +31,7 @@
     height: 50px;
     width: 210px;
     align-self: center;
-    margin: 10px
+    margin-bottom: 5px;
+    text-align: right;
+    font-size: 30px;
 }
