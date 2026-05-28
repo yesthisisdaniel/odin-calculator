@@ -39,5 +39,5 @@ calculatorButtons.forEach((button) => {
 
 function updateNumberOne(e) {
     console.log(event.target.innerText)
-    display.textContent+=(event.target.innerText)
+    display.value = event.target.innerText
 }
