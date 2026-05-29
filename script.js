@@ -73,12 +73,13 @@ operatorButtons.forEach((button) => {
 })
 
 function updateOperator(e) {
-    if (numberOne !="" && numberTwo != "") {
+    if (numberOne != "" && numberTwo != "") {
         operate();
         numberOne = result;
         numberTwo = "";
     }
     operator = e.target.innerText;
+    display.value = `${numberOne} ${operator}`;
 }
 
 function updateNumbers(e) {
