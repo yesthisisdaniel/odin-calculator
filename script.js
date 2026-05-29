@@ -2,6 +2,7 @@ let numberOne = "";
 let numberTwo = "";
 let operator = "";
 let result = "";
+let isFinalResult = false;
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
 const digitButtons = document.querySelectorAll(".digitButtons")
 const operatorButtons = document.querySelectorAll(".operatorButtons")
@@ -73,6 +74,10 @@ operatorButtons.forEach((button) => {
 })
 
 function updateOperator(e) {
+    if (isFinalResult === true) {
+        clearAll()
+        isFinalResult = false;
+    }
     if (numberOne != "" && numberTwo != "") {
         operate();
         numberOne = result;
