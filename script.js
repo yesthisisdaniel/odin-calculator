@@ -3,6 +3,7 @@ let numberTwo = "";
 let operator = "";
 let result = "";
 let isFinalResult = false;
+let lastNumberTwo = "";
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
 const digitButtons = document.querySelectorAll(".digitButtons")
 const operatorButtons = document.querySelectorAll(".operatorButtons")
@@ -34,6 +35,9 @@ let subtract = function(numberOne, numberTwo) {
 equalsButton.addEventListener("click", operate)
 
 function operate() {
+    if (numberTwo === "") {
+        result += operate()
+    }
     switch (operator) {
         case "X":
             display.value = multiply(numberOne, numberTwo)
@@ -41,6 +45,7 @@ function operate() {
             numberOne = result;
             numberTwo = "";
             operator = "";
+            isFinalResult = true;
             break;
         case "÷":
             display.value = divide(numberOne, numberTwo)
@@ -48,6 +53,7 @@ function operate() {
             numberOne = result;
             numberTwo = "";
             operator = "";
+            isFinalResult = true;
             break;
         case "+":
             display.value = add(numberOne, numberTwo)
@@ -55,6 +61,7 @@ function operate() {
             numberOne = result;
             numberTwo = "";
             operator = "";
+            isFinalResult = true;
             break;
         case "-":
             display.value = subtract(numberOne, numberTwo)
@@ -62,6 +69,7 @@ function operate() {
             numberOne = result;
             numberTwo = "";
             operator = "";
+            isFinalResult = true;
             break;
     }
 }
@@ -74,10 +82,6 @@ operatorButtons.forEach((button) => {
 })
 
 function updateOperator(e) {
-    if (isFinalResult === true) {
-        clearAll()
-        isFinalResult = false;
-    }
     if (numberOne != "" && numberTwo != "") {
         operate();
         numberOne = result;
@@ -85,9 +89,14 @@ function updateOperator(e) {
     }
     operator = e.target.innerText;
     display.value = `${numberOne} ${operator}`;
+    isFinalResult = false;
 }
 
 function updateNumbers(e) {
+    if (isFinalResult === true) {
+        clearAll()
+        isFinalResult = false;
+    }
     if (operator == "") {
         numberOne += e.target.innerText;
         display.value += e.target.innerText;
