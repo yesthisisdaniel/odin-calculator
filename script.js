@@ -4,6 +4,7 @@ let operator = "";
 let result = "";
 let isFinalResult = false;
 let lastNumberTwo = "";
+let lastOperator = "";
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
 const digitButtons = document.querySelectorAll(".digitButtons")
 const operatorButtons = document.querySelectorAll(".operatorButtons")
@@ -35,8 +36,9 @@ let subtract = function(numberOne, numberTwo) {
 equalsButton.addEventListener("click", operate)
 
 function operate() {
-    if (numberTwo === "") {
+    if (numberTwo === "" && operator === "") {
         numberTwo = lastNumberTwo;
+        operator = lastOperator;
     }
     switch (operator) {
         case "X":
