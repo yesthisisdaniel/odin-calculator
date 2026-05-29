@@ -71,6 +71,7 @@ digitButtons.forEach((button) => {
 operatorButtons.forEach((button) => {
     button.addEventListener("click", updateOperator)
 })
+
 function updateOperator(e) {
     operator = e.target.innerText
     display.value = `${numberOne} ${e.target.innerText}`;
