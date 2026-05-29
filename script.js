@@ -44,44 +44,26 @@ function operate() {
         case "X":
             display.value = multiply(numberOne, numberTwo)
             result = multiply(numberOne, numberTwo)
-            numberOne = result;
-            lastNumberTwo = numberTwo;
-            numberTwo = "";
-            lastOperator = operator;
-            operator = "";
-            isFinalResult = true;
             break;
         case "÷":
             display.value = divide(numberOne, numberTwo)
             result = divide(numberOne, numberTwo)
-            numberOne = result;
-            lastNumberTwo = numberTwo;
-            numberTwo = "";
-            lastOperator = operator;
-            operator = "";
-            isFinalResult = true;
             break;
         case "+":
             display.value = add(numberOne, numberTwo)
             result = add(numberOne, numberTwo)
-            numberOne = result;
-            lastNumberTwo = numberTwo;
-            numberTwo = "";
-            lastOperator = operator;
-            operator = "";
-            isFinalResult = true;
             break;
         case "-":
             display.value = subtract(numberOne, numberTwo)
             result = subtract(numberOne, numberTwo)
-            numberOne = result;
-            lastNumberTwo = numberTwo;
-            numberTwo = "";
-            lastOperator = operator;
-            operator = "";
-            isFinalResult = true;
             break;
     }
+    numberOne = result;
+    lastNumberTwo = numberTwo;
+    numberTwo = "";
+    lastOperator = operator;
+    operator = "";
+    isFinalResult = true;
 }
 
 digitButtons.forEach((button) => {
