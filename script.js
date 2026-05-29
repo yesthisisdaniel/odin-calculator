@@ -42,12 +42,20 @@ function clearAll() {
 equalsButton.addEventListener("click", operate)
 
 function operate() {
+    if (numberOne === "" && numberTwo === "" && operator === "") {
+        return;
+    }
     if (numberTwo === "" && operator === "") {
         numberTwo = lastNumberTwo;
         operator = lastOperator;
     }
     result = operations[operator](numberOne, numberTwo);
-    display.value = result;
+    if (result === Infinity || result === undefined) {
+        display.value = "Ah, ah, ah. Nice try ;)"
+    }
+    else {
+        display.value = result;
+    }
     numberOne = result;
     lastNumberTwo = numberTwo;
     numberTwo = "";
@@ -66,8 +74,6 @@ operatorButtons.forEach((button) => {
 function updateOperator(e) {
     if (numberOne != "" && numberTwo != "") {
         operate();
-        numberOne = result;
-        numberTwo = "";
     }
     operator = e.target.innerText;
     display.value = `${numberOne} ${operator}`;
