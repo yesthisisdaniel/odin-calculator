@@ -17,24 +17,26 @@ function clearAll() {
 }
 
 let multiply = function(numberOne, numberTwo) {
-    numberOne * numberTwo
+    return Number(numberOne) * Number(numberTwo)
 }
 let divide = function(numberOne, numberTwo) {
-    Number(numberOne) / Number(numberTwo)
+    return Number(numberOne) / Number(numberTwo)
 }
 let add = function(numberOne, numberTwo) {
-    numberOne + numberTwo
+    return Number(numberOne) + Number(numberTwo)
 }
 let subtract = function(numberOne, numberTwo) {
-    numberOne - numberTwo
+    return Number(numberOne) - Number(numberTwo)
 }
 
-function operate (numberOne, numberTwo, operator) {
+equalsButton.addEventListener("click", operate)
+
+function operate() {
     switch (operator) {
         case "X":
             display.value = multiply(numberOne, numberTwo)
             break;
-        case "/":
+        case "÷":
             display.value = divide(numberOne, numberTwo)
             break;
         case "+":
@@ -44,7 +46,6 @@ function operate (numberOne, numberTwo, operator) {
             display.value = subtract(numberOne, numberTwo)
     }
 }
-equalsButton.addEventListener("click", operate)
 
 digitButtons.forEach((button) => {
     button.addEventListener("click", updateNumbers)
@@ -58,16 +59,19 @@ function updateOperator(e) {
 }
 
 function updateNumbers(e) {
-    if (numberOne == "") {
-        numberOne = e.target.innerText;
+    if (operator == "") {
+        numberOne += e.target.innerText;
         display.value += e.target.innerText;
         console.log(e.target.innerText)
     }
-    else if (operator == "") {
-        updateOperator();
-    }
-    else if(numberTwo == "") {
-        numberTwo = e.target.innerText;
-        display.value = e.target.innerText;
+    else{
+        if (numberTwo === "") {
+            numberTwo += e.target.innerText;
+            display.value = e.target.innerText;
+        }
+        else {
+            numberTwo += e.target.innerText;
+            display.value += e.target.innerText
+        }
     }
 }
