@@ -26,51 +26,35 @@ function clearAll() {
     operator = "";
 }
 
-let multiply = function(numberOne, numberTwo) {
-    return Number(numberOne) * Number(numberTwo)
-}
-let divide = function(numberOne, numberTwo) {
-    return Number(numberOne) / Number(numberTwo)
-}
-let add = function(numberOne, numberTwo) {
-    return Number(numberOne) + Number(numberTwo)
-}
-let subtract = function(numberOne, numberTwo) {
-    return Number(numberOne) - Number(numberTwo)
-}
+// let multiply = function(numberOne, numberTwo) {
+//     return Number(numberOne) * Number(numberTwo)
+// }
+// let divide = function(numberOne, numberTwo) {
+//     return Number(numberOne) / Number(numberTwo)
+// }
+// let add = function(numberOne, numberTwo) {
+//     return Number(numberOne) + Number(numberTwo)
+// }
+// let subtract = function(numberOne, numberTwo) {
+//     return Number(numberOne) - Number(numberTwo)
+// }
 
 equalsButton.addEventListener("click", operate)
 
-// function operate() {
-//     if (numberTwo === "" && operator === "") {
-//         numberTwo = lastNumberTwo;
-//         operator = lastOperator;
-//     }
-//     switch (operator) {
-//         case "X":
-//             display.value = multiply(numberOne, numberTwo)
-//             result = multiply(numberOne, numberTwo)
-//             break;
-//         case "÷":
-//             display.value = divide(numberOne, numberTwo)
-//             result = divide(numberOne, numberTwo)
-//             break;
-//         case "+":
-//             display.value = add(numberOne, numberTwo)
-//             result = add(numberOne, numberTwo)
-//             break;
-//         case "-":
-//             display.value = subtract(numberOne, numberTwo)
-//             result = subtract(numberOne, numberTwo)
-//             break;
-//     }
-//     numberOne = result;
-//     lastNumberTwo = numberTwo;
-//     numberTwo = "";
-//     lastOperator = operator;
-//     operator = "";
-//     isFinalResult = true;
-// }
+function operate() {
+    if (numberTwo === "" && operator === "") {
+        numberTwo = lastNumberTwo;
+        operator = lastOperator;
+    }
+    result = operations[operator](numberOne, numberTwo);
+    display.value = result;
+    numberOne = result;
+    lastNumberTwo = numberTwo;
+    numberTwo = "";
+    lastOperator = operator;
+    operator = "";
+    isFinalResult = true;
+}
 
 digitButtons.forEach((button) => {
     button.addEventListener("click", updateNumbers)
