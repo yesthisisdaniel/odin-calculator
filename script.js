@@ -1,6 +1,7 @@
 let numberOne = "";
 let numberTwo = "";
-let operator = ""
+let operator = "";
+let result = "";
 const calculatorButtons = document.querySelectorAll(".calculatorButtons")
 const digitButtons = document.querySelectorAll(".digitButtons")
 const operatorButtons = document.querySelectorAll(".operatorButtons")
@@ -35,15 +36,32 @@ function operate() {
     switch (operator) {
         case "X":
             display.value = multiply(numberOne, numberTwo)
+            result = multiply(numberOne, numberTwo)
+            numberOne = result;
+            numberTwo = "";
+            operator = "";
             break;
         case "÷":
             display.value = divide(numberOne, numberTwo)
+            result = divide(numberOne, numberTwo)
+            numberOne = result;
+            numberTwo = "";
+            operator = "";
             break;
         case "+":
             display.value = add(numberOne, numberTwo)
+            result = add(numberOne, numberTwo)
+            numberOne = result;
+            numberTwo = "";
+            operator = "";
             break;
         case "-":
             display.value = subtract(numberOne, numberTwo)
+            result = subtract(numberOne, numberTwo)
+            numberOne = result;
+            numberTwo = "";
+            operator = "";
+            break;
     }
 }
 
@@ -55,7 +73,7 @@ operatorButtons.forEach((button) => {
 })
 function updateOperator(e) {
     operator = e.target.innerText
-    display.value = e.target.innerText;
+    display.value = `${numberOne} ${e.target.innerText}`;
 }
 
 function updateNumbers(e) {
@@ -67,7 +85,7 @@ function updateNumbers(e) {
     else{
         if (numberTwo === "") {
             numberTwo += e.target.innerText;
-            display.value = e.target.innerText;
+            display.value = `${numberOne} ${operator} ${e.target.innerText}`
         }
         else {
             numberTwo += e.target.innerText;
