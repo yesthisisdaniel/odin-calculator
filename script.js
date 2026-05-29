@@ -36,14 +36,16 @@ equalsButton.addEventListener("click", operate)
 
 function operate() {
     if (numberTwo === "") {
-        result += operate()
+        numberTwo = lastNumberTwo;
     }
     switch (operator) {
         case "X":
             display.value = multiply(numberOne, numberTwo)
             result = multiply(numberOne, numberTwo)
             numberOne = result;
+            lastNumberTwo = numberTwo;
             numberTwo = "";
+            lastOperator = operator;
             operator = "";
             isFinalResult = true;
             break;
@@ -51,7 +53,9 @@ function operate() {
             display.value = divide(numberOne, numberTwo)
             result = divide(numberOne, numberTwo)
             numberOne = result;
+            lastNumberTwo = numberTwo;
             numberTwo = "";
+            lastOperator = operator;
             operator = "";
             isFinalResult = true;
             break;
@@ -59,7 +63,9 @@ function operate() {
             display.value = add(numberOne, numberTwo)
             result = add(numberOne, numberTwo)
             numberOne = result;
+            lastNumberTwo = numberTwo;
             numberTwo = "";
+            lastOperator = operator;
             operator = "";
             isFinalResult = true;
             break;
@@ -67,7 +73,9 @@ function operate() {
             display.value = subtract(numberOne, numberTwo)
             result = subtract(numberOne, numberTwo)
             numberOne = result;
+            lastNumberTwo = numberTwo;
             numberTwo = "";
+            lastOperator = operator;
             operator = "";
             isFinalResult = true;
             break;
