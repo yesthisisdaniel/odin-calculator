@@ -1,7 +1,5 @@
-body {
-    width:80%;
-    margin-left:auto;
-    margin-right:auto;
+h1 {
+    text-align: center;
 }
 
 #calculatorContainer {
@@ -26,6 +24,7 @@ body {
     border: 2px;
     border-style: solid;
     border-color: black;
+    background-color: #FF986A;
 }
 
 .digitButtons {
@@ -52,4 +51,13 @@ body {
     margin-bottom: 5px;
     text-align: right;
     font-size: 30px;
+}
+
+#equalsButton {
+    background-color: #F16D34;
+    width: 100px;
+}
+
+#zeroButton {
+    width: 100px
 }
