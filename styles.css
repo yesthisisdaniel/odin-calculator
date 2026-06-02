@@ -1,10 +1,16 @@
+body {
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 #calculatorContainer {
     display: flex;
     border-color: black;
     border-style: solid;
     width: 250px;
     padding: 4px;
-    justify-content: space-between;
+    justify-self: center;
     flex-direction: column;
 }
 
@@ -17,7 +23,19 @@
     font-size: 15px;
     align-items: center;
     justify-content: center;
+    border: 2px;
+    border-style: solid;
+    border-color: black;
 }
+
+.digitButtons {
+    background-color: #BBE0EF;
+}
+
+.operatorButtons {
+    background-color: #FF5722;
+}
+
 .row {
     display: flex;
     justify-content: center;
