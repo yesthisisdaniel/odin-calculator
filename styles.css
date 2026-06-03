@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 h1 {
     text-align: center;
 }
@@ -25,6 +29,7 @@ h1 {
     border-style: solid;
     border-color: black;
     background-color: #FF986A;
+    cursor: pointer;
 }
 
 .digitButtons {
@@ -55,9 +60,9 @@ h1 {
 
 #equalsButton {
     background-color: #F16D34;
-    width: 100px;
+    width: 105px;
 }
 
 #zeroButton {
-    width: 100px
+    width: 105px
 }
