@@ -25,6 +25,17 @@ function clearAll() {
     numberTwo = "";
     operator = "";
     isFinalResult = false
+    display.style.fontSize = "44px";
+}
+
+function scaleDisplay() {
+    let minFontSize = 20;
+    let currentFontSize = parseInt(getComputedStyle(display).fontSize);
+    while (currentFontSize > minFontSize && display.scrollWidth > display.clientWidth) {
+        currentFontSize -= 2;
+        display.style.fontSize = currentFontSize + "px";
+        console.log(currentFontSize, display.scrollWidth, display.clientWidth);
+    }              
 }
 
 // let multiply = function(numberOne, numberTwo) {
@@ -55,7 +66,14 @@ function operate() {
         display.value = "Ah, ah, ah. Nice try ;)"
     }
     else {
-        display.value = result;
+       let stringResult = result.toString()
+
+        if (stringResult.length > 11) {
+         display.value = result.toPrecision(10);
+        }
+        else {
+        display.value = parseFloat(result)
+        }
     }
     numberOne = result;
     lastNumberTwo = numberTwo;
@@ -63,6 +81,7 @@ function operate() {
     lastOperator = operator;
     operator = "";
     isFinalResult = true;
+    scaleDisplay()
 }
 
 digitButtons.forEach((button) => {
@@ -101,4 +120,5 @@ function updateNumbers(e) {
             display.value += e.target.innerText
         }
     }
+    scaleDisplay();
 }
