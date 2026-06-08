@@ -24,6 +24,7 @@ function clearAll() {
     numberOne = "";
     numberTwo = "";
     operator = "";
+    isFinalResult = false
 }
 
 // let multiply = function(numberOne, numberTwo) {
@@ -72,6 +73,7 @@ operatorButtons.forEach((button) => {
 })
 
 function updateOperator(e) {
+    if (numberOne === "") return;
     if (numberOne != "" && numberTwo != "") {
         operate();
     }
