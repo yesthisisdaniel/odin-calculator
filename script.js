@@ -16,7 +16,6 @@ const operations = {
     "÷": (a, b) => Number(a) / Number(b)
 };
 
-// clearButton.addEventListener("click", clearAll)
 function clearAll() {
     display.value = "";
     numberOne = "";
@@ -47,7 +46,6 @@ function renderDisplay() {
     scaleDisplay();
 }
 
-// backspaceButton.addEventListener("click", backspace)
 function backspace () {
     if (isFinalResult === true) {
         clearAll()
@@ -67,7 +65,6 @@ function backspace () {
     }
 }
 
-// percentButton.addEventListener("click", convertToPercent)
 function convertToPercent() {
     if (isFinalResult) {
         numberOne = Number((result) / 100).toString();
@@ -91,7 +88,6 @@ function scaleDisplay() {
     }              
 }
 
-// equalsButton.addEventListener("click", operate)
 function operate() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
@@ -111,13 +107,6 @@ function operate() {
     scaleDisplay()
     renderDisplay();
 }
-
-// digitButtons.forEach((button) => {
-//     button.addEventListener("click", updateNumbers)
-// })
-// operatorButtons.forEach((button) => {
-//     button.addEventListener("click", updateOperator)
-// })
 
 function updateOperator(e) {
     if (numberOne === "") return;
