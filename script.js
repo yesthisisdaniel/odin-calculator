@@ -79,6 +79,20 @@ function convertToPercent() {
     renderDisplay();
 }
 
+function squareRoot() {
+    if (isFinalResult) {
+        numberOne = Math.sqrt(Number(numberOne)).toString();
+        isFinalResult = false;
+    }
+    else if (numberTwo) {
+        numberTwo = Math.sqrt(Number(numberTwo)).toString();
+    }
+    else {
+        numberOne = Math.sqrt(Number(numberOne)).toString();
+    }
+    renderDisplay();
+}
+
 function scaleDisplay() {
     let minFontSize = 20;
     let currentFontSize = parseInt(getComputedStyle(display).fontSize);
@@ -140,7 +154,6 @@ function updateNumbers(e) {
 }
 
 calculatorContainer.addEventListener("click", handleGridClick);
-
 function handleGridClick(e) {
     if (!e.target.matches("button")) return;
     const button = e.target;
