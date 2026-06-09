@@ -18,6 +18,7 @@ h1 {
     justify-self: center;
     background-color: #fff;
     background-color: beige;
+    margin: auto;
 }
 
 .calculatorButtons {
