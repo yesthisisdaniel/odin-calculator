@@ -11,6 +11,7 @@ const operatorButtons = document.querySelectorAll(".operatorButtons")
 const display = document.querySelector("#display")
 const clearButton = document.querySelector("#acButton")
 const equalsButton = document.querySelector("#equalsButton")
+const percentButton = document.querySelector("#percentButton")
 const operations = {
     "+": (a, b) => Number(a) + Number(b),
     "-": (a, b) => Number(a) - Number(b),
