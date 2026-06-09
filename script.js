@@ -11,6 +11,7 @@ const operatorButtons = document.querySelectorAll(".operatorButtons")
 const display = document.querySelector("#display")
 const clearButton = document.querySelector("#acButton")
 const equalsButton = document.querySelector("#equalsButton")
+const backspaceButton = document.querySelector("#backspaceButton")
 const operations = {
     "+": (a, b) => Number(a) + Number(b),
     "-": (a, b) => Number(a) - Number(b),
@@ -26,6 +27,41 @@ function clearAll() {
     operator = "";
     isFinalResult = false
     display.style.fontSize = "44px";
+}
+
+function renderDisplay() {
+    if (operator === "") {
+        display.value = numberOne;
+    } else if (numberTwo === "") {
+        display.value = `${numberOne} ${operator}`;
+    } else {
+        display.value = `${numberOne} ${operator} ${numberTwo}`;
+    }
+    scaleDisplay();
+}
+
+backspaceButton.addEventListener("click", backspace)
+function backspace () {
+    if (isFinalResult === true) {
+        clearAll()
+        finalResult = false;
+    }
+    if (numberOne === "" && numberTwo === "" && operator === "") {
+        return;
+    }
+    else if (numberOne != "" && operator == "" && numberTwo == "") {
+        numberOne = "";
+        updateNumbers()
+    }
+    else if (numberOne != "" && operator != "" && numberTWo === "") {
+        numberTwo = "";
+        updateNumbers();
+    }
+    else {
+        operator = "";
+        updateNumbers;
+    }
+
 }
 
 function scaleDisplay() {
