@@ -44,24 +44,20 @@ backspaceButton.addEventListener("click", backspace)
 function backspace () {
     if (isFinalResult === true) {
         clearAll()
-        finalResult = false;
-    }
-    if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
     }
-    else if (numberOne != "" && operator == "" && numberTwo == "") {
-        numberOne = "";
-        updateNumbers()
+    if (numberTwo) {
+        numberTwo = numberTwo.slice(0, -1)
+        renderDisplay();
     }
-    else if (numberOne != "" && operator != "" && numberTWo === "") {
-        numberTwo = "";
-        updateNumbers();
+    else if (operator) {
+        operator = operator.slice(0, -1);
+        renderDisplay()
     }
     else {
-        operator = "";
-        updateNumbers;
+        numberOne = numberOne.slice(0, -1);
+        renderDisplay()
     }
-
 }
 
 function scaleDisplay() {
@@ -133,7 +129,7 @@ function updateOperator(e) {
         operate();
     }
     operator = e.target.innerText;
-    display.value = `${numberOne} ${operator}`;
+    renderDisplay()
     isFinalResult = false;
 }
 
@@ -144,17 +140,16 @@ function updateNumbers(e) {
     }
     if (operator == "") {
         numberOne += e.target.innerText;
-        display.value += e.target.innerText;
+        renderDisplay()
     }
     else{
         if (numberTwo === "") {
             numberTwo += e.target.innerText;
-            display.value = `${numberOne} ${operator} ${e.target.innerText}`
+            renderDisplay()
         }
         else {
             numberTwo += e.target.innerText;
-            display.value += e.target.innerText
+            renderDisplay()
         }
     }
-    scaleDisplay();
 }
