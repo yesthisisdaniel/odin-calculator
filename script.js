@@ -12,7 +12,7 @@ const display = document.querySelector("#display");
 const clearButton = document.querySelector("#acButton");
 const equalsButton = document.querySelector("#equalsButton");
 const backspaceButton = document.querySelector("#backspaceButton");
-const percentButtin = document.querySelector("#percentButton");
+const percentButton = document.querySelector("#percentButton");
 const operations = {
     "+": (a, b) => Number(a) + Number(b),
     "-": (a, b) => Number(a) - Number(b),
@@ -31,13 +31,23 @@ function clearAll() {
 }
 
 function renderDisplay() {
-    if (operator === "") {
-        display.value = numberOne;
-    } else if (numberTwo === "") {
-        display.value = `${numberOne} ${operator}`;
-    } else {
-        display.value = `${numberOne} ${operator} ${numberTwo}`;
+    if (result === Infinity || result === undefined) {
+        display.value = "Ah, ah, ah. Nice try ;)";
+        return;
     }
+    let formattedNumberOne = numberOne;
+
+    if (numberOne.length > 11 && numberOne.includes(".")) {
+        formattedNumberOne = Number(numberOne).toPrecision(10);
+    }
+    if (operator === "") {
+        display.value = formattedNumberOne;
+    } else if (numberTwo === "") {
+        display.value = `${formattedNumberOne} ${operator}`;
+    } else {
+        display.value = `${formattedNumberOne} ${operator} ${numberTwo}`;
+    }
+
     scaleDisplay();
 }
 
@@ -61,31 +71,31 @@ function backspace () {
     }
 }
 
+percentButton.addEventListener("click", convertToPercent)
+function convertToPercent() {
+    if (isFinalResult) {
+        result = Number((numberOne) / 100).toString();
+        isFinalResult = false;
+    }
+    else if (numberTwo) {
+        numberTwo = Number((numberTwo) / 100).toString();
+    }
+    else {
+        numberOne = Number((numberOne) / 100).toString();
+    }
+    renderDisplay();
+}
+
 function scaleDisplay() {
     let minFontSize = 20;
     let currentFontSize = parseInt(getComputedStyle(display).fontSize);
     while (currentFontSize > minFontSize && display.scrollWidth > display.clientWidth) {
         currentFontSize -= 2;
         display.style.fontSize = currentFontSize + "px";
-        console.log(currentFontSize, display.scrollWidth, display.clientWidth);
     }              
 }
 
-// let multiply = function(numberOne, numberTwo) {
-//     return Number(numberOne) * Number(numberTwo)
-// }
-// let divide = function(numberOne, numberTwo) {
-//     return Number(numberOne) / Number(numberTwo)
-// }
-// let add = function(numberOne, numberTwo) {
-//     return Number(numberOne) + Number(numberTwo)
-// }
-// let subtract = function(numberOne, numberTwo) {
-//     return Number(numberOne) - Number(numberTwo)
-// }
-
 equalsButton.addEventListener("click", operate)
-
 function operate() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
@@ -95,19 +105,7 @@ function operate() {
         operator = lastOperator;
     }
     result = operations[operator](numberOne, numberTwo);
-    if (result === Infinity || result === undefined) {
-        display.value = "Ah, ah, ah. Nice try ;)"
-    }
-    else {
-       let stringResult = result.toString()
 
-        if (stringResult.length > 11) {
-         display.value = result.toPrecision(10);
-        }
-        else {
-        display.value = parseFloat(result)
-        }
-    }
     numberOne = result;
     lastNumberTwo = numberTwo;
     numberTwo = "";
@@ -115,6 +113,7 @@ function operate() {
     operator = "";
     isFinalResult = true;
     scaleDisplay()
+    renderDisplay();
 }
 
 digitButtons.forEach((button) => {
