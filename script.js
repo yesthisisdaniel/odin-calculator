@@ -74,7 +74,7 @@ function backspace () {
 percentButton.addEventListener("click", convertToPercent)
 function convertToPercent() {
     if (isFinalResult) {
-        result = Number((numberOne) / 100).toString();
+        numberOne = Number((result) / 100).toString();
         isFinalResult = false;
     }
     else if (numberTwo) {
