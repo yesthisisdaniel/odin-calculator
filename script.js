@@ -5,14 +5,10 @@ let result = "";
 let isFinalResult = false;
 let lastNumberTwo = "";
 let lastOperator = "";
-const calculatorButtons = document.querySelectorAll(".calculatorButtons");
-const digitButtons = document.querySelectorAll(".digitButtons");
-const operatorButtons = document.querySelectorAll(".operatorButtons");
+
 const display = document.querySelector("#display");
-const clearButton = document.querySelector("#acButton");
-const equalsButton = document.querySelector("#equalsButton");
-const backspaceButton = document.querySelector("#backspaceButton");
-const percentButton = document.querySelector("#percentButton");
+const calculatorContainer = document.querySelector("#calculatorContainer");
+
 const operations = {
     "+": (a, b) => Number(a) + Number(b),
     "-": (a, b) => Number(a) - Number(b),
@@ -20,7 +16,7 @@ const operations = {
     "÷": (a, b) => Number(a) / Number(b)
 };
 
-clearButton.addEventListener("click", clearAll)
+// clearButton.addEventListener("click", clearAll)
 function clearAll() {
     display.value = "";
     numberOne = "";
@@ -51,7 +47,7 @@ function renderDisplay() {
     scaleDisplay();
 }
 
-backspaceButton.addEventListener("click", backspace)
+// backspaceButton.addEventListener("click", backspace)
 function backspace () {
     if (isFinalResult === true) {
         clearAll()
@@ -71,7 +67,7 @@ function backspace () {
     }
 }
 
-percentButton.addEventListener("click", convertToPercent)
+// percentButton.addEventListener("click", convertToPercent)
 function convertToPercent() {
     if (isFinalResult) {
         numberOne = Number((result) / 100).toString();
@@ -95,7 +91,7 @@ function scaleDisplay() {
     }              
 }
 
-equalsButton.addEventListener("click", operate)
+// equalsButton.addEventListener("click", operate)
 function operate() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
@@ -116,12 +112,12 @@ function operate() {
     renderDisplay();
 }
 
-digitButtons.forEach((button) => {
-    button.addEventListener("click", updateNumbers)
-})
-operatorButtons.forEach((button) => {
-    button.addEventListener("click", updateOperator)
-})
+// digitButtons.forEach((button) => {
+//     button.addEventListener("click", updateNumbers)
+// })
+// operatorButtons.forEach((button) => {
+//     button.addEventListener("click", updateOperator)
+// })
 
 function updateOperator(e) {
     if (numberOne === "") return;
@@ -151,5 +147,30 @@ function updateNumbers(e) {
             numberTwo += e.target.innerText;
             renderDisplay()
         }
+    }
+}
+
+calculatorContainer.addEventListener("click", handleGridClick);
+
+function handleGridClick(e) {
+    if (!e.target.matches("button")) return;
+    const button = e.target;
+    if (button.classList.contains("digitButtons")) {
+        updateNumbers(e); 
+    }
+    else if (button.classList.contains("operatorButtons")) {
+        updateOperator(e);
+    }
+    else if (button.id === "equalsButton") {
+        operate();
+    }
+    else if (button.id === "acButton") {
+        clearAll();
+    }
+    else if (button.id === "backspaceButton") {
+        backspace();
+    }
+    else if (button.id === "percentButton") {
+        convertToPercent();
     }
 }
