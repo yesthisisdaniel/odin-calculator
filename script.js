@@ -1,15 +1,3 @@
-let numberOne = "";
-let numberTwo = "";
-let operator = "";
-let result = "";
-let isFinalResult = false;
-let isNumberOneSqrt = false;
-let isNumberTwoSqrt = false;
-let isNumberOnePi = false;
-let isNumberTwoPi = false;
-let lastNumberTwo = "";
-let lastOperator = "";
-
 const display = document.querySelector("#display");
 const calculatorContainer = document.querySelector("#calculatorContainer");
 
@@ -19,6 +7,13 @@ const operations = {
     "X": (a, b) => Number(a) * Number(b),
     "÷": (a, b) => Number(a) / Number(b)
 };
+
+const globalState = {
+    numberOne : "", numberTwo : "", operator : "",
+    result : "", isFinalResult : false, 
+    flags: { numOneSqrt: false, numTwoSqrt: false, numOnePi: false, numTwoPi: false },
+    last : {lastNumberTwo : "", lastOperator : ""}
+}
 
 function clearAll() {
     display.value = "";
