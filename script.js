@@ -89,6 +89,9 @@ function backspace () {
 }
 
 function convertToPercent() {
+    if (numberOne === "" && numberTwo === "" && operator === "") {
+        return;
+    }
     if (isFinalResult) {
         numberOne = Number((result) / 100).toString();
         isFinalResult = false;
