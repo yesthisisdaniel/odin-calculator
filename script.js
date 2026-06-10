@@ -25,6 +25,8 @@ function clearAll() {
     operator = "";
     isFinalResult = false
     display.style.fontSize = "44px";
+    isNumberOneSqrt = false;
+    isNumberTwoSqrt = false;
 }
 
 function renderDisplay() {
@@ -32,24 +34,27 @@ function renderDisplay() {
         display.value = "Ah, ah, ah. Nice try ;)";
         return;
     }
+    
+    // Format numberOne
     let formattedNumberOne = numberOne;
+    if (numberOne.length > 11 && numberOne.includes(".")) {
+        formattedNumberOne = Number(numberOne).toPrecision(10);
+    }
     if (isNumberOneSqrt) {
         formattedNumberOne = `√(${formattedNumberOne})`;
     }
+
+    // Format numberTwo
     let formattedNumberTwo = numberTwo;
     if (isNumberTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
     }
-
-    if (numberOne.length > 11 && numberOne.includes(".")) {
-        formattedNumberOne = Number(numberOne).toPrecision(10);
-    }
     if (operator === "") {
         display.value = formattedNumberOne;
-    } else if (numberTwo === "") {
+    } else if (numberTwo === "" && !isNumberTwoSqrt) { 
         display.value = `${formattedNumberOne} ${operator}`;
     } else {
-        display.value = `${formattedNumberOne} ${operator} ${numberTwo}`;
+        display.value = `${formattedNumberOne} ${operator} ${formattedNumberTwo}`;
     }
     scaleDisplay();
 }
@@ -59,17 +64,28 @@ function backspace () {
         clearAll()
         return;
     }
-    if (numberTwo) {
-        numberTwo = numberTwo.slice(0, -1)
+    if (numberTwo !== "" || isNumberTwoSqrt) {
+        if (numberTwo !== "") {
+            numberTwo = numberTwo.slice(0, -1);
+        } else {
+            isNumberTwoSqrt = false;
+        }
         renderDisplay();
     }
     else if (operator) {
         operator = operator.slice(0, -1);
-        renderDisplay()
+        renderDisplay();
+    }
+    else if (numberOne !== "" || isNumberOneSqrt) {
+        if (numberOne !== "") {
+            numberOne = numberOne.slice(0, -1);
+        } else {
+            isNumberOneSqrt = false;
+        }
+        renderDisplay();
     }
     else {
-        numberOne = numberOne.slice(0, -1);
-        renderDisplay()
+        clearAll();
     }
 }
 
@@ -92,15 +108,14 @@ function squareRoot() {
         numberOne = Math.sqrt(Number(numberOne)).toString();
         isFinalResult = false;
     }
-    else if (numberTwo) {
+    else if (numberTwo || operator) {
         isNumberTwoSqrt = true; 
     }
-    else if (numberOne) {
+    else {
         isNumberOneSqrt = true;
     }
     renderDisplay();
 }
-
 function scaleDisplay() {
     let minFontSize = 20;
     let currentFontSize = parseInt(getComputedStyle(display).fontSize);
@@ -111,14 +126,20 @@ function scaleDisplay() {
 }
 
 function operate() {
-    if (numberOne === "" && numberTwo === "" && operator === "") {
+    if (operator === "" && numberTwo === "") {
+        if (isNumberOneSqrt) {
+            numberOne = Math.sqrt(Number(numberOne)).toString();
+            isNumberOneSqrt = false;
+            isFinalResult = true;
+            scaleDisplay();
+            renderDisplay();
+        }
         return;
     }
     if (numberTwo === "" && operator === "") {
         numberTwo = lastNumberTwo;
         operator = lastOperator;
     }
-
     if (isNumberOneSqrt) {
         numberOne = Math.sqrt(Number(numberOne)).toString();
         isNumberOneSqrt = false;
@@ -135,7 +156,7 @@ function operate() {
     lastOperator = operator;
     operator = "";
     isFinalResult = true;
-    scaleDisplay()
+    scaleDisplay();
     renderDisplay();
 }
 
