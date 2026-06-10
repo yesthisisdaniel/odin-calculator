@@ -121,11 +121,18 @@ function posOrNeg() {
     }
 
     if (operator != "" && !numberTwo.includes("-")) {
-        numberTwo = numberTwo * -1;
+        numberTwo = "-" + numberTwo
     }
-    else if (operator === "" && !numberOne.includes("-")) {
-        numberOne = numberOne * -1;
+    else if (operator != "" && numberTwo.includes("-")) {
+        numberTwo = numberTwo.slice(1)
     }
+    if (operator === "" && !numberOne.includes("-")) {
+        numberOne = "-" + numberOne
+    }
+    else if (operator === "" && numberOne.includes("-")) {
+        numberOne = numberOne.slice(1)
+    }
+
     renderDisplay();
     console.log(numberOne, numberTwo)
 }
