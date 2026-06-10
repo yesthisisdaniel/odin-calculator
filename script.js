@@ -5,6 +5,7 @@ let result = "";
 let isFinalResult = false;
 let isNumberOneSqrt = false;
 let isNumberTwoSqrt = false;
+let isFinalResultSqrt = false;
 let lastNumberTwo = "";
 let lastOperator = "";
 
@@ -34,8 +35,6 @@ function renderDisplay() {
         display.value = "Ah, ah, ah. Nice try ;)";
         return;
     }
-    
-    // Format numberOne
     let formattedNumberOne = numberOne;
     if (numberOne.length > 11 && numberOne.includes(".")) {
         formattedNumberOne = Number(numberOne).toPrecision(10);
@@ -43,11 +42,13 @@ function renderDisplay() {
     if (isNumberOneSqrt) {
         formattedNumberOne = `√(${formattedNumberOne})`;
     }
-
-    // Format numberTwo
     let formattedNumberTwo = numberTwo;
     if (isNumberTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
+    }
+    let formattedResult = result;
+    if (isFinalResult) {
+        formattedResult = `√(${result})`;
     }
     if (operator === "") {
         display.value = formattedNumberOne;
@@ -105,8 +106,8 @@ function convertToPercent() {
 
 function squareRoot() {
     if (isFinalResult) {
-        numberOne = Math.sqrt(Number(numberOne)).toString();
-        isFinalResult = false;
+        isFinalResultSqrt = true;
+        // isFinalResult = false;
     }
     else if (numberTwo || operator) {
         isNumberTwoSqrt = true; 
@@ -116,6 +117,20 @@ function squareRoot() {
     }
     renderDisplay();
 }
+
+function pi() {
+   if (isFinalResult) {
+    return;
+   }
+   else if (numberTwo === "") {
+    numberTwo = "3.14159265359";
+   }
+   else if (numberOne === "") {
+    numberOne = "3.14159265359"
+   }
+   renderDisplay();
+}
+
 function scaleDisplay() {
     let minFontSize = 20;
     let currentFontSize = parseInt(getComputedStyle(display).fontSize);
@@ -198,6 +213,9 @@ function handleGridClick(e) {
 
     if (button.id === "squareRoot") {
         squareRoot();
+    }
+    else if (button.id === "piButton") {
+        pi();
     }
     else if (button.id === "percentButton") {
         convertToPercent();
