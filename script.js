@@ -44,6 +44,8 @@ function renderDisplay() {
     if (numberOne.length > 11 && numberOne.includes(".")) {
         formattedNumberOne = Number(numberOne).toPrecision(10);
     }
+    
+    // Check Pi flag first, then wrap with Sqrt if needed -> yields √(π)
     if (isNumberOnePi) {
         formattedNumberOne = "π";
     }
@@ -76,6 +78,7 @@ function backspace () {
     }
     if (isNumberTwoPi) {
         isNumberTwoPi = false;
+        numberTwo = "";
         renderDisplay();
     }
     else if (numberTwo !== "" || isNumberTwoSqrt) {
@@ -92,6 +95,7 @@ function backspace () {
     }
     else if (isNumberOnePi) {
         isNumberOnePi = false;
+        numberOne = "";
         renderDisplay();
     }
     else if (numberOne !== "" || isNumberOneSqrt) {
@@ -111,6 +115,12 @@ function convertToPercent() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
     }
+    
+    // If they change PI to a percent, turn off the PI flags 
+    // so the screen displays the actual decimal result instead of the symbol
+    if (isNumberOnePi) isNumberOnePi = false;
+    if (isNumberTwoPi) isNumberTwoPi = false;
+
     if (isFinalResult) {
         numberOne = Number((result) / 100).toString();
         isFinalResult = false;
@@ -140,19 +150,21 @@ function squareRoot() {
 }
 
 function pi() {
-   if (isFinalResult) {
-       clearAll();
-       isFinalResult = false;
-   }
-   if (operator !== "") {
-    numberTwo = "";
-    isNumberTwoPi = true;
-   }
-   else {
-    numberOne = "";
-    isNumberOnePi = true;
-   }
-   renderDisplay();
+    if (isFinalResult) {
+        clearAll();
+        isFinalResult = false;
+    }
+    // FIX: We assign the actual value to the variable immediately 
+    // so it passes your empty string "" check safeguards across the app!
+    if (operator !== "") {
+        numberTwo = "3.14159265359";
+        isNumberTwoPi = true;
+    }
+    else {
+        numberOne = "3.14159265359";
+        isNumberOnePi = true;
+    }
+    renderDisplay();
 }
 
 function scaleDisplay() {
@@ -168,18 +180,15 @@ function operate() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
     }
+    
+    // Clear the Pi flags because the raw numbers are already loaded into the variables!
+    isNumberOnePi = false;
+    isNumberTwoPi = false;
+
     if (numberTwo === "" && operator === "") {
         if (lastOperator !== "") {
             numberTwo = lastNumberTwo;
             operator = lastOperator;
-        }
-        else if (isNumberOnePi) {
-            numberOne = "3.14159265359";
-            isNumberOnePi = false;
-            isFinalResult = true;
-            scaleDisplay();
-            renderDisplay();
-            return;
         }
         else if (isNumberOneSqrt) {
             numberOne = Math.sqrt(Number(numberOne)).toString();
@@ -190,17 +199,11 @@ function operate() {
             return;
         } 
         else {
+            isFinalResult = true;
+            scaleDisplay();
+            renderDisplay();
             return;
         }
-    }
-
-    if (isNumberOnePi) {
-        numberOne = "3.14159265359";
-        isNumberOnePi = false;
-    }
-    if (isNumberTwoPi) {
-        numberTwo = "3.14159265359";
-        isNumberTwoPi = false;
     }
     if (isNumberOneSqrt) {
         numberOne = Math.sqrt(Number(numberOne)).toString();
@@ -222,7 +225,7 @@ function operate() {
 }
 
 function updateOperator(e) {
-    if (numberOne === "" && !isNumberOnePi) return;
+    if (numberOne === "") return;
     if (numberOne != "" && numberTwo != "") {
         operate();
     }
