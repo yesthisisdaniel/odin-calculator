@@ -3,6 +3,8 @@ let numberTwo = "";
 let operator = "";
 let result = "";
 let isFinalResult = false;
+let isNumberOneSqrt = false;
+let isNumberTwoSqrt = false;
 let lastNumberTwo = "";
 let lastOperator = "";
 
@@ -31,6 +33,13 @@ function renderDisplay() {
         return;
     }
     let formattedNumberOne = numberOne;
+    if (isNumberOneSqrt) {
+        formattedNumberOne = `√(${formattedNumberOne})`;
+    }
+    let formattedNumberTwo = numberTwo;
+    if (isNumberTwoSqrt) {
+        formattedNumberTwo = `√(${formattedNumberTwo})`;
+    }
 
     if (numberOne.length > 11 && numberOne.includes(".")) {
         formattedNumberOne = Number(numberOne).toPrecision(10);
@@ -42,7 +51,6 @@ function renderDisplay() {
     } else {
         display.value = `${formattedNumberOne} ${operator} ${numberTwo}`;
     }
-
     scaleDisplay();
 }
 
@@ -85,10 +93,10 @@ function squareRoot() {
         isFinalResult = false;
     }
     else if (numberTwo) {
-        numberTwo = Math.sqrt(Number(numberTwo)).toString();
+        isNumberTwoSqrt = true; 
     }
-    else {
-        numberOne = Math.sqrt(Number(numberOne)).toString();
+    else if (numberOne) {
+        isNumberOneSqrt = true;
     }
     renderDisplay();
 }
@@ -109,6 +117,15 @@ function operate() {
     if (numberTwo === "" && operator === "") {
         numberTwo = lastNumberTwo;
         operator = lastOperator;
+    }
+
+    if (isNumberOneSqrt) {
+        numberOne = Math.sqrt(Number(numberOne)).toString();
+        isNumberOneSqrt = false;
+    }
+    if (isNumberTwoSqrt) {
+        numberTwo = Math.sqrt(Number(numberTwo)).toString();
+        isNumberTwoSqrt = false;
     }
     result = operations[operator](numberOne, numberTwo);
 
@@ -157,7 +174,14 @@ calculatorContainer.addEventListener("click", handleGridClick);
 function handleGridClick(e) {
     if (!e.target.matches("button")) return;
     const button = e.target;
-    if (button.classList.contains("digitButtons")) {
+
+    if (button.id === "squareRoot") {
+        squareRoot();
+    }
+    else if (button.id === "percentButton") {
+        convertToPercent();
+    }
+    else if (button.classList.contains("digitButtons")) {
         updateNumbers(e); 
     }
     else if (button.classList.contains("operatorButtons")) {
@@ -171,8 +195,5 @@ function handleGridClick(e) {
     }
     else if (button.id === "backspaceButton") {
         backspace();
-    }
-    else if (button.id === "percentButton") {
-        convertToPercent();
     }
 }
