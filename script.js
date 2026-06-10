@@ -110,6 +110,26 @@ function backspace () {
     }
 }
 
+function posOrNeg() {
+    if (numberOne === "" && numberTwo === "") {
+        numberOne = "-"
+        renderDisplay();
+        return;
+    }
+    if (isFinalResult) {
+        result = numberOne * -1;
+    }
+
+    if (operator != "" && !numberTwo.includes("-")) {
+        numberTwo = numberTwo * -1;
+    }
+    else if (operator === "" && !numberOne.includes("-")) {
+        numberOne = numberOne * -1;
+    }
+    renderDisplay();
+    console.log(numberOne, numberTwo)
+}
+
 function convertToPercent() {
     if (numberOne === "" && numberTwo === "" && operator === "") {
         return;
@@ -268,6 +288,9 @@ function handleGridClick(e) {
     }
     else if (button.id === "percentButton") {
         convertToPercent();
+    }
+    else if (button.id === "positiveNegativeButton") {
+        posOrNeg();
     }
     else if (button.classList.contains("digitButtons")) {
         updateNumbers(e); 
