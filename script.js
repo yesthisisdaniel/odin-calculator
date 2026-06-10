@@ -1,3 +1,15 @@
+// let numberOne = "";
+let numberTwo = "";
+let operator = "";
+let result = "";
+let isFinalResult = false;
+let isNumberOneSqrt = false;
+let isNumberTwoSqrt = false;
+let isNumberOnePi = false;
+let isNumberTwoPi = false;
+let lastNumberTwo = "";
+let lastOperator = "";
+
 const display = document.querySelector("#display");
 const calculatorContainer = document.querySelector("#calculatorContainer");
 
@@ -35,7 +47,7 @@ function renderDisplay() {
         scaleDisplay();
         return;
     }
-    let formattedNumberOne = numberOne;
+    let formattedNumberOne = globalState.numberOne;
     if (numberOne.length > 11 && numberOne.includes(".")) {
         formattedNumberOne = Number(numberOne).toPrecision(10);
     }
