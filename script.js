@@ -5,7 +5,8 @@ let result = "";
 let isFinalResult = false;
 let isNumberOneSqrt = false;
 let isNumberTwoSqrt = false;
-let isFinalResultSqrt = false;
+let isNumberOnePi = false;
+let isNumberTwoPi = false;
 let lastNumberTwo = "";
 let lastOperator = "";
 
@@ -28,6 +29,8 @@ function clearAll() {
     display.style.fontSize = "44px";
     isNumberOneSqrt = false;
     isNumberTwoSqrt = false;
+    isNumberOnePi = false; 
+    isNumberTwoPi = false; 
     result = "";
 }
 
@@ -41,16 +44,24 @@ function renderDisplay() {
     if (numberOne.length > 11 && numberOne.includes(".")) {
         formattedNumberOne = Number(numberOne).toPrecision(10);
     }
+    if (isNumberOnePi) {
+        formattedNumberOne = "π";
+    }
     if (isNumberOneSqrt) {
         formattedNumberOne = `√(${formattedNumberOne})`;
     }
+    
     let formattedNumberTwo = numberTwo;
+    if (isNumberTwoPi) {
+        formattedNumberTwo = "π";
+    }
     if (isNumberTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
     }
+    
     if (operator === "") {
         display.value = formattedNumberOne;
-    } else if (numberTwo === "" && !isNumberTwoSqrt) { 
+    } else if (numberTwo === "" && !isNumberTwoSqrt && !isNumberTwoPi) { 
         display.value = `${formattedNumberOne} ${operator}`;
     } else {
         display.value = `${formattedNumberOne} ${operator} ${formattedNumberTwo}`;
@@ -63,7 +74,11 @@ function backspace () {
         clearAll()
         return;
     }
-    if (numberTwo !== "" || isNumberTwoSqrt) {
+    if (isNumberTwoPi) {
+        isNumberTwoPi = false;
+        renderDisplay();
+    }
+    else if (numberTwo !== "" || isNumberTwoSqrt) {
         if (numberTwo !== "") {
             numberTwo = numberTwo.slice(0, -1);
         } else {
@@ -73,6 +88,10 @@ function backspace () {
     }
     else if (operator) {
         operator = operator.slice(0, -1);
+        renderDisplay();
+    }
+    else if (isNumberOnePi) {
+        isNumberOnePi = false;
         renderDisplay();
     }
     else if (numberOne !== "" || isNumberOneSqrt) {
@@ -122,13 +141,16 @@ function squareRoot() {
 
 function pi() {
    if (isFinalResult) {
-    return;
+       clearAll();
+       isFinalResult = false;
    }
-   else if (numberTwo === "") {
-    numberTwo = "3.14159265359";
+   if (operator !== "") {
+    numberTwo = "";
+    isNumberTwoPi = true;
    }
-   else if (numberOne === "") {
-    numberOne = "3.14159265359"
+   else {
+    numberOne = "";
+    isNumberOnePi = true;
    }
    renderDisplay();
 }
@@ -150,7 +172,15 @@ function operate() {
         if (lastOperator !== "") {
             numberTwo = lastNumberTwo;
             operator = lastOperator;
-        } 
+        }
+        else if (isNumberOnePi) {
+            numberOne = "3.14159265359";
+            isNumberOnePi = false;
+            isFinalResult = true;
+            scaleDisplay();
+            renderDisplay();
+            return;
+        }
         else if (isNumberOneSqrt) {
             numberOne = Math.sqrt(Number(numberOne)).toString();
             isNumberOneSqrt = false;
@@ -162,6 +192,15 @@ function operate() {
         else {
             return;
         }
+    }
+
+    if (isNumberOnePi) {
+        numberOne = "3.14159265359";
+        isNumberOnePi = false;
+    }
+    if (isNumberTwoPi) {
+        numberTwo = "3.14159265359";
+        isNumberTwoPi = false;
     }
     if (isNumberOneSqrt) {
         numberOne = Math.sqrt(Number(numberOne)).toString();
@@ -183,7 +222,7 @@ function operate() {
 }
 
 function updateOperator(e) {
-    if (numberOne === "") return;
+    if (numberOne === "" && !isNumberOnePi) return;
     if (numberOne != "" && numberTwo != "") {
         operate();
     }
@@ -199,6 +238,10 @@ function updateNumbers(e) {
     }
     
     if (operator == "") {
+        if (isNumberOnePi) {
+            isNumberOnePi = false;
+            numberOne = "";
+        }
         if (isNumberOneSqrt && numberOne === result.toString()) {
             clearAll();
         }
@@ -206,6 +249,10 @@ function updateNumbers(e) {
         renderDisplay();
     }
     else {
+        if (isNumberTwoPi) {
+            isNumberTwoPi = false;
+            numberTwo = "";
+        }
         numberTwo += e.target.innerText;
         renderDisplay();
     }
