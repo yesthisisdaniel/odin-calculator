@@ -50,7 +50,7 @@ button.styling:active{
     background-color: #BBE0EF;
 }
 
-.operatorButtons {
+.globalState.operatorButtons {
     background-color: #FF5722;
 }
 

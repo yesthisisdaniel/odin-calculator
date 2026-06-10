@@ -1,15 +1,3 @@
-// let numberOne = "";
-let numberTwo = "";
-let operator = "";
-let result = "";
-let isFinalResult = false;
-let isNumberOneSqrt = false;
-let isNumberTwoSqrt = false;
-let isNumberOnePi = false;
-let isNumberTwoPi = false;
-let lastNumberTwo = "";
-let lastOperator = "";
-
 const display = document.querySelector("#display");
 const calculatorContainer = document.querySelector("#calculatorContainer");
 
@@ -20,95 +8,90 @@ const operations = {
     "÷": (a, b) => Number(a) / Number(b)
 };
 
-const globalState = {
-    numberOne : "", numberTwo : "", operator : "",
-    result : "", isFinalResult : false, 
-    flags: { numOneSqrt: false, numTwoSqrt: false, numOnePi: false, numTwoPi: false },
-    last : {lastNumberTwo : "", lastOperator : ""}
+const globalState = getInitialState();
+function getInitialState() {
+    return {
+        numberOne: "", numberTwo: "", operator: "",
+        result: "", isFinalResult: false,
+        flags: { numOneSqrt: false, numTwoSqrt: false, numOnePi: false, numTwoPi: false },
+        last: { lastNumberTwo: "", operator: "" }
+    }
 }
 
 function clearAll() {
+    getInitialState();
     display.value = "";
-    numberOne = "";
-    numberTwo = "";
-    operator = "";
-    isFinalResult = false
     display.style.fontSize = "44px";
-    isNumberOneSqrt = false;
-    isNumberTwoSqrt = false;
-    isNumberOnePi = false; 
-    isNumberTwoPi = false; 
-    result = "";
 }
 
 function renderDisplay() {
-    if (result === Infinity || result === undefined) {
+    if (globalState.result === Infinity || globalState.result === undefined) {
         display.value = "Ah, ah, ah. Nice try ;)";
         scaleDisplay();
         return;
     }
     let formattedNumberOne = globalState.numberOne;
-    if (numberOne.length > 11 && numberOne.includes(".")) {
-        formattedNumberOne = Number(numberOne).toPrecision(10);
+    if (globalState.numberOne.length > 11 && globalState.numberOne.includes(".")) {
+        formattedNumberOne = Number(globalState.numberOne).toPrecision(10);
     }
     
-    if (isNumberOnePi) {
+    if (globalState.flags.numOnePi) {
         formattedNumberOne = "π";
     }
-    if (isNumberOneSqrt) {
+    if (globalState.flags.numOneSqrt) {
         formattedNumberOne = `√(${formattedNumberOne})`;
     }
     
-    let formattedNumberTwo = numberTwo;
-    if (isNumberTwoPi) {
+    let formattedNumberTwo = globalState.numberTwo;
+    if (globalState.flags.numTwoPi) {
         formattedNumberTwo = "π";
     }
-    if (isNumberTwoSqrt) {
+    if (globalState.flags.numTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
     }
     
-    if (operator === "") {
+    if (globalState.operator === "") {
         display.value = formattedNumberOne;
-    } else if (numberTwo === "" && !isNumberTwoSqrt && !isNumberTwoPi) { 
-        display.value = `${formattedNumberOne} ${operator}`;
+    } else if (globalState.numberTwo === "" && !globalState.flags.numTwoSqrt && !globalState.flags.numTwoPi) { 
+        display.value = `${formattedNumberOne} ${globalState.operator}`;
     } else {
-        display.value = `${formattedNumberOne} ${operator} ${formattedNumberTwo}`;
+        display.value = `${formattedNumberOne} ${globalState.operator} ${formattedNumberTwo}`;
     }
     scaleDisplay();
 }
 
 function backspace () {
-    if (isFinalResult === true) {
+    if (globalState.isFinalResult === true) {
         clearAll()
         return;
     }
-    if (isNumberTwoPi) {
-        isNumberTwoPi = false;
-        numberTwo = "";
+    if (globalState.flags.numTwoPi) {
+        globalState.flags.numTwoPi = false;
+        globalState.numberTwo = "";
         renderDisplay();
     }
-    else if (numberTwo !== "" || isNumberTwoSqrt) {
-        if (numberTwo !== "") {
-            numberTwo = numberTwo.slice(0, -1);
+    else if (globalState.numberTwo !== "" || globalState.flags.numTwoSqrt) {
+        if (globalState.numberTwo !== "") {
+            globalState.numberTwo = globalState.numberTwo.slice(0, -1);
         } else {
-            isNumberTwoSqrt = false;
+            globalState.flags.numTwoSqrt = false;
         }
         renderDisplay();
     }
-    else if (operator) {
-        operator = operator.slice(0, -1);
+    else if (globalState.operator) {
+        globalState.operator = globalState.operator.slice(0, -1);
         renderDisplay();
     }
-    else if (isNumberOnePi) {
-        isNumberOnePi = false;
-        numberOne = "";
+    else if (globalState.flags.numOnePi) {
+        globalState.flags.numOnePi = false;
+        globalState.numberOne = "";
         renderDisplay();
     }
-    else if (numberOne !== "" || isNumberOneSqrt) {
-        if (numberOne !== "") {
-            numberOne = numberOne.slice(0, -1);
+    else if (globalState.numberOne !== "" || globalState.flags.numOneSqrt) {
+        if (globalState.numberOne !== "") {
+            globalState.numberOne = globalState.numberOne.slice(0, -1);
         } else {
-            isNumberOneSqrt = false;
+            globalState.flags.numOneSqrt = false;
         }
         renderDisplay();
     }
@@ -118,80 +101,80 @@ function backspace () {
 }
 
 function posOrNeg() {
-    if (numberOne === "" && numberTwo === "") {
-        numberOne = "-"
+    if (globalState.numberOne === "" && globalState.numberTwo === "") {
+        globalState.numberOne = "-"
         renderDisplay();
         return;
     }
-    if (isFinalResult) {
-        result = numberOne * -1;
+    if (globalState.isFinalResult) {
+        globalState.result = globalState.numberOne * -1;
     }
 
-    if (operator != "" && !numberTwo.includes("-")) {
-        numberTwo = "-" + numberTwo
+    if (globalState.operator != "" && !globalState.numberTwo.includes("-")) {
+        globalState.numberTwo = "-" + globalState.numberTwo
     }
-    else if (operator != "" && numberTwo.includes("-")) {
-        numberTwo = numberTwo.slice(1)
+    else if (globalState.operator != "" && globalState.numberTwo.includes("-")) {
+        globalState.numberTwo = globalState.numberTwo.slice(1)
     }
-    if (operator === "" && !numberOne.includes("-")) {
-        numberOne = "-" + numberOne
+    if (globalState.operator === "" && !globalState.numberOne.includes("-")) {
+        globalState.numberOne = "-" + globalState.numberOne
     }
-    else if (operator === "" && numberOne.includes("-")) {
-        numberOne = numberOne.slice(1)
+    else if (globalState.operator === "" && globalState.numberOne.includes("-")) {
+        globalState.numberOne = globalState.numberOne.slice(1)
     }
 
     renderDisplay();
-    console.log(numberOne, numberTwo)
+    console.log(globalState.numberOne, globalState.numberTwo)
 }
 
 function convertToPercent() {
-    if (numberOne === "" && numberTwo === "" && operator === "") {
+    if (globalState.numberOne === "" && globalState.numberTwo === "" && globalState.operator === "") {
         return;
     }
     
-    if (isNumberOnePi) isNumberOnePi = false;
-    if (isNumberTwoPi) isNumberTwoPi = false;
+    if (globalState.flags.numOnePi) globalState.flags.numOnePi = false;
+    if (globalState.flags.numTwoPi) globalState.flags.numTwoPi = false;
 
-    if (isFinalResult) {
-        numberOne = Number((result) / 100).toString();
-        isFinalResult = false;
+    if (globalState.isFinalResult) {
+        globalState.numberOne = Number((globalState.result) / 100).toString();
+        globalState.isFinalResult = false;
     }
-    else if (numberTwo) {
-        numberTwo = Number((numberTwo) / 100).toString();
+    else if (globalState.numberTwo) {
+        globalState.numberTwo = Number((globalState.numberTwo) / 100).toString();
     }
     else {
-        numberOne = Number((numberOne) / 100).toString();
+        globalState.numberOne = Number((globalState.numberOne) / 100).toString();
     }
     renderDisplay();
 }
 
 function squareRoot() {
-    if (isFinalResult) {
-        numberOne = result.toString(); 
-        isNumberOneSqrt = true;
-        isFinalResult = false;
+    if (globalState.isFinalResult) {
+        globalState.numberOne = result.toString(); 
+        globalState.flags.numOneSqrt = true;
+        globalState.isFinalResult = false;
     }
-    else if (numberTwo || operator) {
-        isNumberTwoSqrt = true; 
+    else if (globalState.numberTwo || globalState.operator) {
+        globalState.flags.numTwoSqrt = true; 
     }
     else {
-        isNumberOneSqrt = true;
+        globalState.flags.numOneSqrt = true;
     }
     renderDisplay();
 }
 
 function pi() {
-    if (isFinalResult) {
+    if (globalState.isFinalResult) {
         clearAll();
-        isFinalResult = false;
+        globalState.isFinalResult = false;
     }
-    if (operator !== "") {
-        numberTwo = "3.14159265359";
-        isNumberTwoPi = true;
+    if (globalState.operator !== "") {
+        globalState.numberTwo = "3.14159265359";
+        globalState.flags.numTwoPi = true;
     }
     else {
-        numberOne = "3.14159265359";
-        isNumberOnePi = true;
+        globalState.numberOne = "3.14159265359";
+        globalState.flags.numOnePi = true;
     }
     renderDisplay();
 }
@@ -206,85 +189,85 @@ function scaleDisplay() {
 }
 
 function operate() {
-    if (numberOne === "" && numberTwo === "" && operator === "") {
+    if (globalState.numberOne === "" && globalState.numberTwo === "" && globalState.operator === "") {
         return;
     }
     
-    isNumberOnePi = false;
-    isNumberTwoPi = false;
+    globalState.flags.numOnePi = false;
+    globalState.flags.numTwoPi = false;
 
-    if (numberTwo === "" && operator === "") {
-        if (lastOperator !== "") {
-            numberTwo = lastNumberTwo;
-            operator = lastOperator;
+    if (globalState.numberTwo === "" && globalState.operator === "") {
+        if (globalState.last.operator !== "") {
+            globalState.numberTwo = globalState.lastNumberTwo;
+            globalState.operator = globalState.last.operator;
         }
-        else if (isNumberOneSqrt) {
-            numberOne = Math.sqrt(Number(numberOne)).toString();
-            isNumberOneSqrt = false;
-            isFinalResult = true;
+        else if (globalState.flags.numOneSqrt) {
+            globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+            globalState.flags.numOneSqrt = false;
+            globalState.isFinalResult = true;
             scaleDisplay();
             renderDisplay();
             return;
         } 
         else {
-            isFinalResult = true;
+            globalState.isFinalResult = true;
             scaleDisplay();
             renderDisplay();
             return;
         }
     }
-    if (isNumberOneSqrt) {
-        numberOne = Math.sqrt(Number(numberOne)).toString();
-        isNumberOneSqrt = false;
+    if (globalState.flags.numOneSqrt) {
+        globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+        globalState.flags.numOneSqrt = false;
     }
-    if (isNumberTwoSqrt) {
-        numberTwo = Math.sqrt(Number(numberTwo)).toString();
-        isNumberTwoSqrt = false;
+    if (globalState.flags.numTwoSqrt) {
+        globalState.numberTwo = Math.sqrt(Number(globalState.numberTwo)).toString();
+        globalState.flags.numTwoSqrt = false;
     }
-    result = operations[operator](numberOne, numberTwo);
-    numberOne = result.toString();
-    lastNumberTwo = numberTwo;
-    numberTwo = "";
-    lastOperator = operator;
-    operator = "";
-    isFinalResult = true;
+    globalState.result = operations[globalState.operator](globalState.numberOne, globalState.numberTwo);
+    globalState.numberOne = globalState.result.toString();
+    globalState.last.lastNumberTwo = globalState.numberTwo;
+    globalState.numberTwo = "";
+    globalState.last.operator = globalState.operator;
+    globalState.operator = "";
+    globalState.isFinalResult = true;
     scaleDisplay();
     renderDisplay();
 }
 
 function updateOperator(e) {
-    if (numberOne === "") return;
-    if (numberOne != "" && numberTwo != "") {
+    if (globalState.numberOne === "") return;
+    if (globalState.numberOne != "" && globalState.numberTwo != "") {
         operate();
     }
-    operator = e.target.innerText;
+    globalState.operator = e.target.innerText;
     renderDisplay()
-    isFinalResult = false;
+    globalState.isFinalResult = false;
 }
 
 function updateNumbers(e) {
-    if (isFinalResult === true) {
+    if (globalState.isFinalResult === true) {
         clearAll();
-        isFinalResult = false;
+        globalState.isFinalResult = false;
     }
     
-    if (operator == "") {
-        if (isNumberOnePi) {
-            isNumberOnePi = false;
-            numberOne = "";
+    if (globalState.operator == "") {
+        if (globalState.flags.numOnePi) {
+            globalState.flags.numOnePi = false;
+            globalState.numberOne = "";
         }
-        if (isNumberOneSqrt && numberOne === result.toString()) {
+        if (globalState.flags.numOneSqrt && globalState.numberOne === globalState.result.toString()) {
             clearAll();
         }
-        numberOne += e.target.innerText;
+        globalState.numberOne += e.target.innerText;
         renderDisplay();
     }
     else {
-        if (isNumberTwoPi) {
-            isNumberTwoPi = false;
-            numberTwo = "";
+        if (globalState.flags.numTwoPi) {
+            globalState.flags.numTwoPi = false;
+            globalState.numberTwo = "";
         }
-        numberTwo += e.target.innerText;
+        globalState.numberTwo += e.target.innerText;
         renderDisplay();
     }
 }
