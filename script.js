@@ -28,11 +28,13 @@ function clearAll() {
     display.style.fontSize = "44px";
     isNumberOneSqrt = false;
     isNumberTwoSqrt = false;
+    result = "";
 }
 
 function renderDisplay() {
     if (result === Infinity || result === undefined) {
         display.value = "Ah, ah, ah. Nice try ;)";
+        scaleDisplay();
         return;
     }
     let formattedNumberOne = numberOne;
@@ -138,19 +140,25 @@ function scaleDisplay() {
 }
 
 function operate() {
-    if (operator === "" && numberTwo === "") {
-        if (isNumberOneSqrt) {
+    if (numberOne === "" && numberTwo === "" && operator === "") {
+        return;
+    }
+    if (numberTwo === "" && operator === "") {
+        if (lastOperator !== "") {
+            numberTwo = lastNumberTwo;
+            operator = lastOperator;
+        } 
+        else if (isNumberOneSqrt) {
             numberOne = Math.sqrt(Number(numberOne)).toString();
             isNumberOneSqrt = false;
             isFinalResult = true;
             scaleDisplay();
             renderDisplay();
+            return;
+        } 
+        else {
+            return;
         }
-        return;
-    }
-    if (numberTwo === "" && operator === "") {
-        numberTwo = lastNumberTwo;
-        operator = lastOperator;
     }
     if (isNumberOneSqrt) {
         numberOne = Math.sqrt(Number(numberOne)).toString();
@@ -161,8 +169,7 @@ function operate() {
         isNumberTwoSqrt = false;
     }
     result = operations[operator](numberOne, numberTwo);
-
-    numberOne = result;
+    numberOne = result.toString();
     lastNumberTwo = numberTwo;
     numberTwo = "";
     lastOperator = operator;
