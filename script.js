@@ -46,10 +46,6 @@ function renderDisplay() {
     if (isNumberTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
     }
-    let formattedResult = result;
-    if (isFinalResult) {
-        formattedResult = `√(${result})`;
-    }
     if (operator === "") {
         display.value = formattedNumberOne;
     } else if (numberTwo === "" && !isNumberTwoSqrt) { 
@@ -106,8 +102,9 @@ function convertToPercent() {
 
 function squareRoot() {
     if (isFinalResult) {
-        isFinalResultSqrt = true;
-        // isFinalResult = false;
+        numberOne = result.toString(); 
+        isNumberOneSqrt = true;
+        isFinalResult = false;
     }
     else if (numberTwo || operator) {
         isNumberTwoSqrt = true; 
@@ -187,22 +184,20 @@ function updateOperator(e) {
 
 function updateNumbers(e) {
     if (isFinalResult === true) {
-        clearAll()
+        clearAll();
         isFinalResult = false;
     }
+    
     if (operator == "") {
+        if (isNumberOneSqrt && numberOne === result.toString()) {
+            clearAll();
+        }
         numberOne += e.target.innerText;
-        renderDisplay()
+        renderDisplay();
     }
-    else{
-        if (numberTwo === "") {
-            numberTwo += e.target.innerText;
-            renderDisplay()
-        }
-        else {
-            numberTwo += e.target.innerText;
-            renderDisplay()
-        }
+    else {
+        numberTwo += e.target.innerText;
+        renderDisplay();
     }
 }
 
