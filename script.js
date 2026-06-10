@@ -45,7 +45,6 @@ function renderDisplay() {
         formattedNumberOne = Number(numberOne).toPrecision(10);
     }
     
-    // Check Pi flag first, then wrap with Sqrt if needed -> yields √(π)
     if (isNumberOnePi) {
         formattedNumberOne = "π";
     }
@@ -116,8 +115,6 @@ function convertToPercent() {
         return;
     }
     
-    // If they change PI to a percent, turn off the PI flags 
-    // so the screen displays the actual decimal result instead of the symbol
     if (isNumberOnePi) isNumberOnePi = false;
     if (isNumberTwoPi) isNumberTwoPi = false;
 
@@ -154,8 +151,6 @@ function pi() {
         clearAll();
         isFinalResult = false;
     }
-    // FIX: We assign the actual value to the variable immediately 
-    // so it passes your empty string "" check safeguards across the app!
     if (operator !== "") {
         numberTwo = "3.14159265359";
         isNumberTwoPi = true;
@@ -181,7 +176,6 @@ function operate() {
         return;
     }
     
-    // Clear the Pi flags because the raw numbers are already loaded into the variables!
     isNumberOnePi = false;
     isNumberTwoPi = false;
 
