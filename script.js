@@ -31,7 +31,7 @@ function renderDisplay() {
         return;
     }
     let formattedNumberOne = globalState.numberOne;
-    if (globalState.numberOne.length > 11 && globalState.numberOne.includes(".")) {
+    if (globalState.numberOne.length > 11) {//&& globalState.numberOne.includes(".")) {
         formattedNumberOne = Number(globalState.numberOne).toPrecision(10);
     }
     
