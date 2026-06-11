@@ -139,7 +139,7 @@ function convertToPercent() {
         globalState.numberTwo = Math.sqrt(Number(globalState.numberTwo)).toString();
         globalState.flags.numTwoSqrt = false;
     }
-    else{
+    else (globalState.flags.numOneSqrt) {
         globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
         globalState.flags.numOneSqrt = false;
     }
@@ -256,7 +256,6 @@ function updateOperator(e) {
 function updateNumbers(e) {
     if (globalState.isFinalResult === true) {
         clearAll();
-        globalState.isFinalResult = false;
     }
     
     if (globalState.operator == "") {
