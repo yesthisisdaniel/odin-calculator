@@ -19,7 +19,7 @@ function getInitialState() {
 }
 
 function clearAll() {
-    getInitialState();
+    Object.assign(globalState, getInitialState());
     display.value = "";
     display.style.fontSize = "44px";
 }
@@ -150,7 +150,7 @@ function convertToPercent() {
 
 function squareRoot() {
     if (globalState.isFinalResult) {
-        globalState.numberOne = result.toString(); 
+        globalState.numberOne = globalState.result.toString(); 
         globalState.flags.numOneSqrt = true;
         globalState.isFinalResult = false;
     }
