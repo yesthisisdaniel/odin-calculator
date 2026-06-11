@@ -135,7 +135,14 @@ function convertToPercent() {
     
     if (globalState.flags.numOnePi) globalState.flags.numOnePi = false;
     if (globalState.flags.numTwoPi) globalState.flags.numTwoPi = false;
-
+    if (globalState.flags.numTwoSqrt) {
+        globalState.numberTwo = Math.sqrt(Number(globalState.numberTwo)).toString();
+        globalState.flags.numTwoSqrt = false;
+    }
+    else{
+        globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+        globalState.flags.numOneSqrt = false;
+    }
     if (globalState.isFinalResult) {
         globalState.numberOne = Number((globalState.result) / 100).toString();
         globalState.isFinalResult = false;
@@ -199,7 +206,7 @@ function operate() {
 
     if (globalState.numberTwo === "" && globalState.operator === "") {
         if (globalState.last.operator !== "") {
-            globalState.numberTwo = globalState.lastNumberTwo;
+            globalState.numberTwo = globalState.last.lastNumberTwo;
             globalState.operator = globalState.last.operator;
         }
         else if (globalState.flags.numOneSqrt) {
@@ -256,9 +263,6 @@ function updateNumbers(e) {
         if (globalState.flags.numOnePi) {
             globalState.flags.numOnePi = false;
             globalState.numberOne = "";
-        }
-        if (globalState.flags.numOneSqrt && globalState.numberOne === globalState.result.toString()) {
-            clearAll();
         }
         globalState.numberOne += e.target.innerText;
         renderDisplay();
