@@ -107,7 +107,8 @@ function posOrNeg() {
         return;
     }
     if (globalState.isFinalResult) {
-        globalState.result = globalState.numberOne * -1;
+        globalState.numberOne = globalState.numberOne * -1;
+        return;
     }
 
     if (globalState.operator != "" && !globalState.numberTwo.includes("-")) {
