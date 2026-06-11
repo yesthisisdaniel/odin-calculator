@@ -31,7 +31,7 @@ function renderDisplay() {
         return;
     }
     let formattedNumberOne = globalState.numberOne;
-    if (globalState.numberOne.length > 11) {//&& globalState.numberOne.includes(".")) {
+    if (globalState.numberOne.length > 11) {
         formattedNumberOne = Number(globalState.numberOne).toPrecision(10);
     }
     
@@ -205,6 +205,14 @@ function operate() {
     globalState.flags.numTwoPi = false;
 
     if (globalState.numberTwo === "" && globalState.operator === "") {
+        if (globalState.flags.numOneSqrt) {
+            globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+            globalState.flags.numOneSqrt = false;
+            globalState.isFinalResult = true;
+            scaleDisplay();
+            renderDisplay();
+            return;
+        } 
         if (globalState.last.operator !== "") {
             globalState.numberTwo = globalState.last.lastNumberTwo;
             globalState.operator = globalState.last.operator;
