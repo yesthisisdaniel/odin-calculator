@@ -140,10 +140,10 @@ function convertToPercent() {
         globalState.numberTwo = Math.sqrt(Number(globalState.numberTwo)).toString();
         globalState.flags.numTwoSqrt = false;
     }
-    else {
-        globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
-        globalState.flags.numOneSqrt = false;
-    }
+    // else if (globalState.flags.numOneSqrt) {
+    //     globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+    //     globalState.flags.numOneSqrt = false;
+    // }
     if (globalState.isFinalResult) {
         globalState.numberOne = Number((globalState.result) / 100).toString();
         globalState.isFinalResult = false;
