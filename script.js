@@ -196,43 +196,28 @@ function scaleDisplay() {
         display.style.fontSize = currentFontSize + "px";
     }              
 }
-
-function operate() {
-    if (globalState.numberOne === "" && globalState.numberTwo === "" && globalState.operator === "") {
+function unaryOperation() {
+    if (globalState.flags.numOneSqrt) {
+        globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+        globalState.flags.numOneSqrt = false;
+        globalState.isFinalResult = true;
+        scaleDisplay();
+        renderDisplay();
+        return;
+    } 
+    if (globalState.last.operator !== "") {
+        globalState.numberTwo = globalState.last.lastNumberTwo;
+        globalState.operator = globalState.last.operator;
+        binaryOperation();
+    }
+    else {
+        globalState.isFinalResult = true;
+        scaleDisplay();
+        renderDisplay();
         return;
     }
-    
-    globalState.flags.numOnePi = false;
-    globalState.flags.numTwoPi = false;
-
-    if (globalState.numberTwo === "" && globalState.operator === "") {
-        if (globalState.flags.numOneSqrt) {
-            globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
-            globalState.flags.numOneSqrt = false;
-            globalState.isFinalResult = true;
-            scaleDisplay();
-            renderDisplay();
-            return;
-        } 
-        if (globalState.last.operator !== "") {
-            globalState.numberTwo = globalState.last.lastNumberTwo;
-            globalState.operator = globalState.last.operator;
-        }
-        else if (globalState.flags.numOneSqrt) {
-            globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
-            globalState.flags.numOneSqrt = false;
-            globalState.isFinalResult = true;
-            scaleDisplay();
-            renderDisplay();
-            return;
-        } 
-        else {
-            globalState.isFinalResult = true;
-            scaleDisplay();
-            renderDisplay();
-            return;
-        }
-    }
+}
+function binaryOperation() {
     if (globalState.flags.numOneSqrt) {
         globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
         globalState.flags.numOneSqrt = false;
@@ -250,6 +235,21 @@ function operate() {
     globalState.isFinalResult = true;
     scaleDisplay();
     renderDisplay();
+}
+function operate() {
+    if (globalState.numberOne === "" && globalState.numberTwo === "" && globalState.operator === "") {
+        return;
+    }
+    
+    globalState.flags.numOnePi = false;
+    globalState.flags.numTwoPi = false;
+
+    if (globalState.numberTwo === "" && globalState.operator === "") {
+        unaryOperation();
+    }
+    else {
+        binaryOperation();
+    }
 }
 
 function updateOperator(e) {
