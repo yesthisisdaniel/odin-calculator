@@ -23,13 +23,7 @@ function clearAll() {
     display.value = "";
     display.style.fontSize = "44px";
 }
-
-function renderDisplay() {
-    if (globalState.result === Infinity || globalState.result === undefined) {
-        display.value = "Ah, ah, ah. Nice try ;)";
-        scaleDisplay();
-        return;
-    }
+function computeValues() {
     let formattedNumberOne = globalState.numberOne;
     if (globalState.numberOne.length > 11) {
         formattedNumberOne = Number(globalState.numberOne).toPrecision(10);
@@ -49,14 +43,21 @@ function renderDisplay() {
     if (globalState.flags.numTwoSqrt) {
         formattedNumberTwo = `√(${formattedNumberTwo})`;
     }
-    
     if (globalState.operator === "") {
-        display.value = formattedNumberOne;
+        return formattedNumberOne;
     } else if (globalState.numberTwo === "" && !globalState.flags.numTwoSqrt && !globalState.flags.numTwoPi) { 
-        display.value = `${formattedNumberOne} ${globalState.operator}`;
+        return `${formattedNumberOne} ${globalState.operator}`;
     } else {
-        display.value = `${formattedNumberOne} ${globalState.operator} ${formattedNumberTwo}`;
+        return `${formattedNumberOne} ${globalState.operator} ${formattedNumberTwo}`;
     }
+}
+function renderDisplay() {
+    if (globalState.result === Infinity || globalState.result === undefined) {
+        display.value = "Ah, ah, ah. Nice try ;)";
+        scaleDisplay();
+        return;
+    }
+    display.value = computeValues();
     scaleDisplay();
 }
 
@@ -102,12 +103,13 @@ function backspace () {
 
 function posOrNeg() {
     if (globalState.numberOne === "" && globalState.numberTwo === "") {
-        globalState.numberOne = "-"
+        globalState.numberOne = "-";
         renderDisplay();
         return;
     }
     if (globalState.isFinalResult) {
         globalState.numberOne = globalState.numberOne * -1;
+        renderDisplay();
         return;
     }
 
@@ -125,7 +127,6 @@ function posOrNeg() {
     }
 
     renderDisplay();
-    console.log(globalState.numberOne, globalState.numberTwo)
 }
 
 function convertToPercent() {
