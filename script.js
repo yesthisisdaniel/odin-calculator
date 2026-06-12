@@ -188,6 +188,23 @@ function pi() {
     renderDisplay();
 }
 
+function decimal() {
+    if (globalState.isFinalResult) {
+        clearAll();
+        globalState.numberOne = "0.";
+    }
+    else if (globalState.numberOne === "" && globalState.operator === "" && globalState.numberTwo === "") {
+        globalState.numberOne = ("0.")
+    }
+    else if (!globalState.numberTwo.includes(".") && globalState.operator != "") {
+        globalState.numberTwo = globalState.numberTwo + ".";
+    }
+    else if (!globalState.numberOne.includes(".")){
+        globalState.numberOne = globalState.numberOne + ".";
+    }
+    renderDisplay();
+}
+
 function scaleDisplay() {
     let minFontSize = 20;
     let currentFontSize = parseInt(getComputedStyle(display).fontSize);
@@ -196,6 +213,7 @@ function scaleDisplay() {
         display.style.fontSize = currentFontSize + "px";
     }              
 }
+
 function unaryOperation() {
     if (globalState.flags.numOneSqrt) {
         globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
@@ -301,6 +319,9 @@ function handleGridClick(e) {
     }
     else if (button.id === "positiveNegativeButton") {
         posOrNeg();
+    }
+    else if (button.id === "decimalButton") {
+        decimal();
     }
     else if (button.classList.contains("digitButtons")) {
         updateNumbers(e); 
