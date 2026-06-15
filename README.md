@@ -60,7 +60,7 @@ The final project in The Odin Project fundamentals path.
 ## Contact
 
 Daniel Nowak - danieln311@gmail.com
-Project Link: [https://github.com/yesthisisdaniel/odin-calculator]([https://github.com/github_username/repo_name](https://github.com/yesthisisdaniel/odin-calculator))
+Project Link: [https://github.com/yesthisisdaniel/odin-calculator](https://github.com/yesthisisdaniel/odin-calculator)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
