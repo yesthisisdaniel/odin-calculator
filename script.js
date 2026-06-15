@@ -277,12 +277,12 @@ function operate() {
     }
 }
 
-function updateOperator(e) {
+function updateOperator(operator) {
     if (globalState.numberOne === "") return;
     if (globalState.numberOne != "" && globalState.numberTwo != "") {
         operate();
     }
-    globalState.operator = e.target.innerText;
+    globalState.operator = operator;
     renderDisplay()
     globalState.isFinalResult = false;
 }
@@ -334,7 +334,7 @@ function handleGridClick(e) {
         updateNumbers(button.innerText); 
     }
     else if (button.classList.contains("operatorButtons")) {
-        updateOperator(e);
+        updateOperator(button.innerText);
     }
     else if (button.id === "equalsButton") {
         operate();
@@ -349,7 +349,6 @@ function handleGridClick(e) {
 
 document.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
-    const button = e.key;
 
     // if (button.id === "squareRoot") {
     //     squareRoot();
@@ -363,16 +362,16 @@ function handleGridKeyboardPress(e) {
     // else if (button.id === "positiveNegativeButton") {
     //     posOrNeg();
     // }
-    // else if (button.id === "decimalButton") {
-    //     decimal();
-    // }
-    if ("0123456789".includes(e.key)) {
+    if (button.id === "decimalButton") {
+        decimal();
+    }
+    else if ("0123456789".includes(e.key)) {
         updateNumbers(e.key); 
     }
-    else if ("+-*/") {
-        updateOperator(e);
+    else if (operatorMap[e.key]) {
+        updateOperator(operatorMap[e.key]);
     }
-    else if (e.key === "=") {
+    else if (e.key === "Enter") {
         operate();
     }
     else if (e.key === "Escape") {
