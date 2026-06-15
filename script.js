@@ -342,7 +342,6 @@ function handleGridClick(e) {
 
 document.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
-    if (!e.key === "button") return;
     const button = e.key;
 
     // if (button.id === "squareRoot") {
@@ -366,13 +365,13 @@ function handleGridKeyboardPress(e) {
     else if ("+-*/") {
         updateOperator(e);
     }
-    else if ("=".includes(e.key)) {
+    else if (e.key === "=") {
         operate();
     }
-    else if ("") {
+    else if (e.key === "Escape") {
         clearAll();
     }
-    else if ("DEL".includes(e.key)) {
+    else if (e.key === "Backspace") {
         backspace();
     }
 }
