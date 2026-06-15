@@ -363,7 +363,7 @@ function handleGridKeyboardPress(e) {
         updateOperator(operatorMap[e.key]);
     }
     else if (e.key === "Enter" || e.key === "=") {
-        operate();
+        operate(e.key);
     }
     else if (e.key === "Escape") {
         clearAll();
