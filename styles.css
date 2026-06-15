@@ -8,6 +8,16 @@ h1 {
     text-align: center;
 }
 
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #F9E1A8;
+  color: black;
+  text-align: center;
+}
+
 #calculatorContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
