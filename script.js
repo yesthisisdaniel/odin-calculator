@@ -280,7 +280,7 @@ function updateOperator(e) {
     globalState.isFinalResult = false;
 }
 
-function updateNumbers(e) {
+function updateNumbers(digit) {
     if (globalState.isFinalResult === true) {
         clearAll();
     }
@@ -290,7 +290,7 @@ function updateNumbers(e) {
             globalState.flags.numOnePi = false;
             globalState.numberOne = "";
         }
-        globalState.numberOne += e.target.innerText;
+        globalState.numberOne += digit;
         renderDisplay();
     }
     else {
@@ -298,7 +298,7 @@ function updateNumbers(e) {
             globalState.flags.numTwoPi = false;
             globalState.numberTwo = "";
         }
-        globalState.numberTwo += e.target.innerText;
+        globalState.numberTwo += digit;
         renderDisplay();
     }
 }
@@ -324,7 +324,7 @@ function handleGridClick(e) {
         decimal();
     }
     else if (button.classList.contains("digitButtons")) {
-        updateNumbers(e); 
+        updateNumbers(button.innerText); 
     }
     else if (button.classList.contains("operatorButtons")) {
         updateOperator(e);
@@ -342,25 +342,25 @@ function handleGridClick(e) {
 
 calculatorContainer.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
-    if (!e.target.matches("button")) return;
+    if (!e.key === "button") return;
     const button = e.target;
 
-    if (button.id === "squareRoot") {
-        squareRoot();
-    }
-    else if (button.id === "piButton") {
-        pi();
-    }
-    else if (button.id === "percentButton") {
-        convertToPercent();
-    }
-    else if (button.id === "positiveNegativeButton") {
-        posOrNeg();
-    }
-    else if (button.id === "decimalButton") {
-        decimal();
-    }
-    else if (button.classList.contains("digitButtons")) {
+    // if (button.id === "squareRoot") {
+    //     squareRoot();
+    // }
+    // else if (button.id === "piButton") {
+    //     pi();
+    // }
+    // else if (button.id === "percentButton") {
+    //     convertToPercent();
+    // }
+    // else if (button.id === "positiveNegativeButton") {
+    //     posOrNeg();
+    // }
+    // else if (button.id === "decimalButton") {
+    //     decimal();
+    // }
+    if ("0123456789".includes(e.key)) {
         updateNumbers(e); 
     }
     else if (button.classList.contains("operatorButtons")) {
