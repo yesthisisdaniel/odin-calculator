@@ -351,10 +351,10 @@ document.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
 
     if (e.key === "%") {
-        convertToPercent(e.key);
+        convertToPercent();
     }
     else if (e.key === ".") {
-        decimal(e.key);
+        decimal();
     }
     else if ("0123456789".includes(e.key)) {
         updateNumbers(e.key); 
@@ -362,7 +362,7 @@ function handleGridKeyboardPress(e) {
     else if (operatorMap[e.key]) {
         updateOperator(operatorMap[e.key]);
     }
-    else if (e.key === "Enter") {
+    else if (e.key === "Enter" || e.key === "=") {
         operate();
     }
     else if (e.key === "Escape") {
