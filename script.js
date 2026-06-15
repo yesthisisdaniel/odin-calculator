@@ -8,6 +8,13 @@ const operations = {
     "÷": (a, b) => Number(a) / Number(b)
 };
 
+const operatorMap = {
+    "+": "+",
+    "-": "-",
+    "*": "X",
+    "/": "÷"
+}
+
 const globalState = getInitialState();
 function getInitialState() {
     return {
