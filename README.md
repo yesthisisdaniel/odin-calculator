@@ -51,7 +51,7 @@ The final project in The Odin Project fundamentals path.
 - [ ] Typing in display support
 - [ ] Multi digit display e.g not only binary but can chain X * Y * Z, etc
 - [ ] Re-work calculator into a more scientific type of calculator
-    - [ ] Larger, more adavnced operations and equations
+    - [ ] Larger, more advanced operations and equations
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
