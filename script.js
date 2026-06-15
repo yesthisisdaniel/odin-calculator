@@ -140,10 +140,10 @@ function convertToPercent() {
         globalState.numberTwo = Math.sqrt(Number(globalState.numberTwo)).toString();
         globalState.flags.numTwoSqrt = false;
     }
-    // else if (globalState.flags.numOneSqrt) {
-    //     globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
-    //     globalState.flags.numOneSqrt = false;
-    // }
+    else if (globalState.flags.numOneSqrt) {
+        globalState.numberOne = Math.sqrt(Number(globalState.numberOne)).toString();
+        globalState.flags.numOneSqrt = false;
+    }
     if (globalState.isFinalResult) {
         globalState.numberOne = Number((globalState.result) / 100).toString();
         globalState.isFinalResult = false;
@@ -305,6 +305,43 @@ function updateNumbers(e) {
 
 calculatorContainer.addEventListener("click", handleGridClick);
 function handleGridClick(e) {
+    if (!e.target.matches("button")) return;
+    const button = e.target;
+
+    if (button.id === "squareRoot") {
+        squareRoot();
+    }
+    else if (button.id === "piButton") {
+        pi();
+    }
+    else if (button.id === "percentButton") {
+        convertToPercent();
+    }
+    else if (button.id === "positiveNegativeButton") {
+        posOrNeg();
+    }
+    else if (button.id === "decimalButton") {
+        decimal();
+    }
+    else if (button.classList.contains("digitButtons")) {
+        updateNumbers(e); 
+    }
+    else if (button.classList.contains("operatorButtons")) {
+        updateOperator(e);
+    }
+    else if (button.id === "equalsButton") {
+        operate();
+    }
+    else if (button.id === "acButton") {
+        clearAll();
+    }
+    else if (button.id === "backspaceButton") {
+        backspace();
+    }
+}
+
+calculatorContainer.addEventListener("keydown", handleGridKeyboardPress);
+function handleGridKeyboardPress(e) {
     if (!e.target.matches("button")) return;
     const button = e.target;
 
