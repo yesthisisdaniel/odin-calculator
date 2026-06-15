@@ -36,12 +36,10 @@ The final project in The Odin Project fundamentals path.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Supported With
-* [![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=fff)](#)
 * [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-886FBF?logo=googlegemini&logoColor=fff)](#)
 * DISCLAIMER: <strong>AI was only used for</strong>:
       <em>
   * Assisting creating CSS styles, such as the retro CRT-type display. I utilized a mix of tutorials I found online along with Gemini to recreate a retro CRT display that I really wanted for the calculator. Tutorials by themselve did not           suffice when pertaining to my specific variables.
-  * As a total last resort when I could not find any specific answers online. And used only to provide a starting point without giving full lines of code to preserve the learning process. Otherwise, documentation, the official Odin               Project Discord, and Stack Overflow were used as a primary resource.</strong>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
