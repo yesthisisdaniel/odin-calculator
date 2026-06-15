@@ -340,10 +340,10 @@ function handleGridClick(e) {
     }
 }
 
-calculatorContainer.addEventListener("keydown", handleGridKeyboardPress);
+document.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
     if (!e.key === "button") return;
-    const button = e.target;
+    const button = e.key;
 
     // if (button.id === "squareRoot") {
     //     squareRoot();
@@ -361,18 +361,18 @@ function handleGridKeyboardPress(e) {
     //     decimal();
     // }
     if ("0123456789".includes(e.key)) {
-        updateNumbers(e); 
+        updateNumbers(e.key); 
     }
-    else if (button.classList.contains("operatorButtons")) {
+    else if ("+-*/") {
         updateOperator(e);
     }
-    else if (button.id === "equalsButton") {
+    else if ("=".includes(e.key)) {
         operate();
     }
-    else if (button.id === "acButton") {
+    else if ("") {
         clearAll();
     }
-    else if (button.id === "backspaceButton") {
+    else if ("DEL".includes(e.key)) {
         backspace();
     }
 }
