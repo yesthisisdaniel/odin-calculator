@@ -350,20 +350,11 @@ function handleGridClick(e) {
 document.addEventListener("keydown", handleGridKeyboardPress);
 function handleGridKeyboardPress(e) {
 
-    // if (button.id === "squareRoot") {
-    //     squareRoot();
-    // }
-    // else if (button.id === "piButton") {
-    //     pi();
-    // }
-    // else if (button.id === "percentButton") {
-    //     convertToPercent();
-    // }
-    // else if (button.id === "positiveNegativeButton") {
-    //     posOrNeg();
-    // }
-    if (button.id === "decimalButton") {
-        decimal();
+    if (e.key === "%") {
+        convertToPercent(e.key);
+    }
+    else if (e.key === ".") {
+        decimal(e.key);
     }
     else if ("0123456789".includes(e.key)) {
         updateNumbers(e.key); 
