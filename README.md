@@ -1,16 +1,100 @@
-# odin-calculator
-The Odin Project Calculator Project
 
-The final project in the fundamentals The Odin Project track
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#skills-learned-and-honed">Skills learned and honed</a></li>
+      </ul>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+      <ul>
+        <li><a href="#supported-with">Supported with</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-The final project that will be the bridge between HTML, CSS, and JS fundamentals into the next step, which for me will be Ruby on Rails. 
-The calculator about 90% of everything taught in the fundamentals. However, I personally veered off a little bit in the end and utilized CSS Grid which was not taught yet. Though, for functionality reasons I opted to used as flexbox didn't want to play nice when creating the calc buttons. 
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-The calculator features basic functionality of any calc e.g.
+<a href='https://postimg.cc/kDk7shtz' target='_blank'><img src='https://i.postimg.cc/kDk7shtz/Screenshot-from-2026-06-15-10-07-07.png' border='0' alt='Screenshot-from-2026-06-15-10-07-07'></a>
 
-  All basic math operations
-  
-    Complete with chain operations via contiuosly pressing the = sign
-  
-  Keyboard support (in progress)
-  
+The final project in The Odin Project fundamentals path. 
+
+### Skills learned and honed
+
+### Built With
+
+* [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Supported With
+* [![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=fff)](#)
+* [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-886FBF?logo=googlegemini&logoColor=fff)](#)
+* DISCLAIMER: <strong>AI was only used for</strong>:
+      <em>
+  * Assisting creating CSS styles, such as the retro CRT-type display. I utilized a mix of tutorials I found online along with Gemini to recreate a retro CRT display that I really wanted for the calculator. Tutorials by themselve did not           suffice when pertaining to my specific variables.
+  * As a total last resort when I could not find any specific answers online. And used only to provide a starting point without giving full lines of code to preserve the learning process. Otherwise, documentation, the official Odin               Project Discord, and Stack Overflow were used as a primary resource.</strong>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Arrow key support
+- [ ] Typing in display support
+- [ ] Multi digit display e.g not only binary but can chain X * Y * Z, etc
+- [ ] Re-work calculator into a more scientific type of calculator
+    - [ ] Larger, more adavnced operations and equations
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Daniel Nowak - danieln311@gmail.com
+Project Link: [https://github.com/yesthisisdaniel/odin-calculator]([https://github.com/github_username/repo_name](https://github.com/yesthisisdaniel/odin-calculator))
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-url]: https://github.com/github_username/repo_name/network/members
+[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-url]: https://github.com/github_username/repo_name/stargazers
+[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-url]: https://github.com/github_username/repo_name/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+<!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
