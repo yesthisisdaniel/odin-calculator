@@ -40,6 +40,7 @@ The final project in The Odin Project fundamentals path.
 * DISCLAIMER: <strong>AI was only used for</strong>:
       <em>
   * Assisting creating CSS styles, such as the retro CRT-type display. I utilized a mix of tutorials I found online along with Gemini to recreate a retro CRT display that I really wanted for the calculator. Tutorials by themselve did not           suffice when pertaining to my specific variables.
+    </em>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
